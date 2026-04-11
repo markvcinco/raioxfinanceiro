@@ -52,10 +52,11 @@ export interface Resposta {
   pontos: number;
 }
 
-export interface ScoreAreas {
-  gestao_financeira_caixa: number;
-  precificacao_receita: number;
-  vendas_previsibilidade: number;
-  operacao_margem: number;
-  governanca_decisao: number;
-}
+export type ScoreAreas = Record<
+  | "gestao_financeira"
+  | "precificacao_receita"
+  | "vendas_previsibilidade"
+  | "operacao_margem"
+  | "governanca_decisao",
+  number
+>;
