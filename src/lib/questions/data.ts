@@ -1,2 +1,4 @@
-// A ser implementado — as 20 perguntas e alternativas
-export {};
+// Movido para src/content/perguntas.ts
+// Re-exportando para manter compatibilidade com imports existentes
+export { PERGUNTAS } from "@/content/perguntas";
+export type { Pergunta, Alternativa } from "@/content/perguntas";
