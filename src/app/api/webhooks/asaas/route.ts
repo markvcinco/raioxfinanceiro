@@ -5,6 +5,39 @@ import {
   confirmarPagamento,
 } from "@/lib/supabase/queries";
 
+const PDF_INTERNAL_TOKEN = process.env.PDF_INTERNAL_TOKEN ?? "dev-token-raioxfinanceiro";
+
+function getBaseUrl(): string {
+  return process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+}
+
+/**
+ * Dispara a geração do PDF em background (fire-and-forget).
+ * Não bloqueia a resposta do webhook.
+ */
+function dispararGeracaoPdf(diagnosticoId: string): void {
+  const url = `${getBaseUrl()}/api/pdf/gerar`;
+
+  fetch(url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-internal-token": PDF_INTERNAL_TOKEN,
+    },
+    body: JSON.stringify({ diagnosticoId }),
+  })
+    .then((res) => {
+      if (!res.ok) {
+        console.error(`[webhook] PDF generation returned ${res.status} for ${diagnosticoId}`);
+      } else {
+        console.log(`[webhook] PDF generation triggered for ${diagnosticoId}`);
+      }
+    })
+    .catch((err) => {
+      console.error(`[webhook] Failed to trigger PDF generation for ${diagnosticoId}:`, err);
+    });
+}
+
 function validarWebhookToken(request: NextRequest): boolean {
   const secret = process.env.ASAAS_WEBHOOK_SECRET;
   if (!secret) {
@@ -70,8 +103,8 @@ export async function POST(request: NextRequest) {
         `[webhook] Pagamento ${evento.payment.id} confirmado — diagnóstico ${pagamento.diagnostico_id} atualizado para 'pago'`
       );
 
-      // TODO: Dispatch PDF generation (next prompt)
-      console.log("Pagamento confirmado — acionar geração de PDF");
+      // Dispatch PDF generation in background (don't block webhook response)
+      dispararGeracaoPdf(pagamento.diagnostico_id);
     } catch (err) {
       console.error(`[webhook] Erro ao processar pagamento:`, err);
       // Return 200 anyway to prevent Asaas from retrying endlessly

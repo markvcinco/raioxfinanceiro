@@ -207,6 +207,22 @@ export async function confirmarPagamento(
   return pagamento;
 }
 
+export async function marcarRelatorioEnviado(diagnosticoId: string) {
+  const supabase = getAdmin();
+
+  const { error } = await supabase
+    .from("diagnosticos")
+    .update({
+      status: "relatorio_enviado",
+      relatorio_enviado_em: new Date().toISOString(),
+    })
+    .eq("id", diagnosticoId);
+
+  if (error) {
+    throw new Error(`Erro ao marcar relatório enviado: ${error.message}`);
+  }
+}
+
 export async function listarPagamentosRecentes(limite = 50) {
   const supabase = getAdmin();
 
