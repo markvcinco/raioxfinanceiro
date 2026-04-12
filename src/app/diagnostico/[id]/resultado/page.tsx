@@ -143,7 +143,7 @@ export default async function ResultadoPage({ params }: PageProps) {
             plano de ação priorizado e recomendações personalizadas.
           </p>
           <Button asChild size="lg" className="cursor-pointer">
-            <Link href={`/pagamento?diagnostico=${id}`}>
+            <Link href={`/checkout/${id}`}>
               Desbloquear relatório por R$ 29,90
             </Link>
           </Button>
