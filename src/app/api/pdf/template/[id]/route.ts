@@ -1,7 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { buscarDiagnosticoPorId } from "@/lib/supabase/queries";
-import { gerarHtmlPdf } from "@/lib/pdf/template";
+import { gerarHtmlCompleto } from "./_components";
 import type { AreaId } from "@/content/areas";
+import type { Persona, Resposta } from "@/types";
 
 interface RouteParams {
   params: Promise<{ id: string }>;
@@ -20,8 +21,10 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
   }
 
   const scoresPorArea = (diagnostico.score_areas ?? {}) as Record<AreaId, number>;
+  const respostas = (diagnostico.respostas ?? []) as unknown as Resposta[];
+  const persona = (diagnostico.persona ?? "apagando_incendio") as Persona;
 
-  const html = gerarHtmlPdf({
+  const html = gerarHtmlCompleto({
     nomeEmpresa: diagnostico.nome_empresa,
     nomeResponsavel: diagnostico.nome_responsavel,
     dataGeracao: new Date(diagnostico.created_at).toLocaleDateString("pt-BR", {
@@ -31,7 +34,8 @@ export async function GET(request: NextRequest, { params }: RouteParams) {
     }),
     scoreGeral: diagnostico.score_geral ?? 0,
     scoresPorArea,
-    persona: diagnostico.persona ?? "apagando_incendio",
+    persona,
+    respostas,
   });
 
   return new Response(html, {
