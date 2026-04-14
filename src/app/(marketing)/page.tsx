@@ -1,4 +1,5 @@
 import { Button } from "@/components/ui/button";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -19,8 +20,8 @@ export default function Home() {
           Diagnóstico da maturidade financeira da sua empresa
         </p>
 
-        <Button size="lg" className="mt-4 px-8 text-base font-semibold">
-          Começar diagnóstico
+        <Button asChild size="lg" className="mt-4 px-8 text-base font-semibold">
+          <Link href="/diagnostico">Começar diagnóstico</Link>
         </Button>
       </div>
     </div>
