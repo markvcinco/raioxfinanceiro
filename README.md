@@ -1,4 +1,4 @@
-# Raio-X Financeiro MARK V
+# Raio-X Financeiro MARK V - roda o build
 
 Diagnóstico da maturidade financeira para PMEs brasileiras.
 
