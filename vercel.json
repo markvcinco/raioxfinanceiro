@@ -1,4 +1,6 @@
 {
+  "framework": "nextjs",
+  "regions": ["gru1"],
   "functions": {
     "src/app/api/pdf/gerar/route.ts": {
       "memory": 1024,
