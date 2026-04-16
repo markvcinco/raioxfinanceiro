@@ -1,4 +1,4 @@
-# Raio-X Financeiro MARK V
+# Raio-X Financeiro MARK V - roda o build
 
 Diagnóstico de maturidade financeira self-service para PMEs brasileiras. O usuário responde 20 perguntas, vê o score na hora e paga R$ 29,90 para receber um relatório completo em PDF.
 
