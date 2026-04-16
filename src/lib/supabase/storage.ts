@@ -1,6 +1,6 @@
 import { createAdminClient } from "./admin";
 
-const BUCKET = "relatorios";
+const BUCKET = "relatorios raiox";
 
 export async function uploadPdf(
   diagnosticoId: string,
