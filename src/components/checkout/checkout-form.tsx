@@ -4,6 +4,8 @@ import { useState, useActionState } from "react";
 import { iniciarCheckoutAction, type CheckoutFormState } from "@/lib/checkout/actions";
 import { CreditCardForm } from "./credit-card-form";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 interface CheckoutFormProps {
   diagnosticoId: string;
@@ -11,7 +13,7 @@ interface CheckoutFormProps {
 
 function FieldError({ errors }: { errors?: string[] }) {
   if (!errors?.length) return null;
-  return <p className="mt-1 text-sm text-destructive">{errors[0]}</p>;
+  return <p className="mt-1.5 text-xs text-destructive">{errors[0]}</p>;
 }
 
 export function CheckoutForm({ diagnosticoId }: CheckoutFormProps) {
@@ -36,14 +38,9 @@ export function CheckoutForm({ diagnosticoId }: CheckoutFormProps) {
     <form action={action} className="space-y-6">
       <input type="hidden" name="diagnostico_id" value={diagnosticoId} />
 
-      <div>
-        <label
-          htmlFor="cpf_cnpj"
-          className="block text-sm font-medium text-foreground mb-1.5"
-        >
-          CPF ou CNPJ
-        </label>
-        <input
+      <div className="space-y-1.5">
+        <Label htmlFor="cpf_cnpj">CPF ou CNPJ</Label>
+        <Input
           id="cpf_cnpj"
           name="cpf_cnpj"
           type="text"
@@ -51,7 +48,6 @@ export function CheckoutForm({ diagnosticoId }: CheckoutFormProps) {
           placeholder="000.000.000-00 ou 00.000.000/0001-00"
           value={cpfCnpj}
           onChange={(e) => setCpfCnpj(e.target.value)}
-          className="w-full rounded-md border border-border bg-muted px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
         <FieldError errors={state.errors?.cpf_cnpj} />
       </div>

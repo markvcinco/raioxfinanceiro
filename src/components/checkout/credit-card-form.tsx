@@ -3,6 +3,8 @@
 import { useActionState } from "react";
 import { pagarComCartaoAction, type CheckoutFormState } from "@/lib/checkout/actions";
 import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
 
 interface CreditCardFormProps {
   diagnosticoId: string;
@@ -66,129 +68,107 @@ export function CreditCardForm({ diagnosticoId, cpfCnpj, onVoltar }: CreditCardF
     }
   }
 
-  const inputClass =
-    "w-full rounded-md border border-border bg-muted px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring";
-
   return (
     <form action={action} onSubmit={handleSubmit} className="space-y-4">
       <input type="hidden" name="diagnostico_id" value={diagnosticoId} />
       <input type="hidden" name="mes_validade" value="" />
       <input type="hidden" name="ano_validade" value="" />
 
-      {/* CPF/CNPJ */}
-      <div>
-        <label className="block text-sm font-medium text-foreground mb-1.5">
-          CPF ou CNPJ do titular
-        </label>
-        <input
+      <div className="space-y-1.5">
+        <Label htmlFor="cpf_cnpj_card">CPF ou CNPJ do titular</Label>
+        <Input
+          id="cpf_cnpj_card"
           name="cpf_cnpj"
           type="text"
           inputMode="numeric"
           defaultValue={cpfCnpj}
           placeholder="000.000.000-00 ou 00.000.000/0001-00"
           required
-          className={inputClass}
         />
         <FieldError errors={state.errors?.cpf_cnpj} />
       </div>
 
-      {/* Card number */}
-      <div>
-        <label className="block text-sm font-medium text-foreground mb-1.5">
-          Número do cartão
-        </label>
-        <input
+      <div className="space-y-1.5">
+        <Label htmlFor="numero_cartao">Número do cartão</Label>
+        <Input
+          id="numero_cartao"
           name="numero_cartao"
           type="text"
           inputMode="numeric"
           placeholder="0000 0000 0000 0000"
           maxLength={19}
           required
-          className={inputClass}
           onChange={handleCardNumberInput}
         />
         <FieldError errors={state.errors?.numero_cartao} />
       </div>
 
-      {/* Holder name */}
-      <div>
-        <label className="block text-sm font-medium text-foreground mb-1.5">
-          Nome impresso no cartão
-        </label>
-        <input
+      <div className="space-y-1.5">
+        <Label htmlFor="nome_titular">Nome impresso no cartão</Label>
+        <Input
+          id="nome_titular"
           name="nome_titular"
           type="text"
           placeholder="NOME SOBRENOME"
           required
-          className={inputClass}
           style={{ textTransform: "uppercase" }}
         />
         <FieldError errors={state.errors?.nome_titular} />
       </div>
 
-      {/* Expiry + CVV */}
       <div className="grid grid-cols-2 gap-3">
-        <div>
-          <label className="block text-sm font-medium text-foreground mb-1.5">
-            Validade
-          </label>
-          <input
+        <div className="space-y-1.5">
+          <Label htmlFor="expiry_display">Validade</Label>
+          <Input
+            id="expiry_display"
             name="expiry_display"
             type="text"
             inputMode="numeric"
             placeholder="MM/AAAA"
             maxLength={7}
             required
-            className={inputClass}
             onChange={handleExpiryInput}
             onBlur={handleExpiryBlur}
           />
           <FieldError errors={state.errors?.mes_validade ?? state.errors?.ano_validade} />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-foreground mb-1.5">
-            CVV
-          </label>
-          <input
+        <div className="space-y-1.5">
+          <Label htmlFor="cvv">CVV</Label>
+          <Input
+            id="cvv"
             name="cvv"
             type="text"
             inputMode="numeric"
             placeholder="123"
             maxLength={4}
             required
-            className={inputClass}
           />
           <FieldError errors={state.errors?.cvv} />
         </div>
       </div>
 
-      {/* CEP + Number */}
       <div className="grid grid-cols-2 gap-3">
-        <div>
-          <label className="block text-sm font-medium text-foreground mb-1.5">
-            CEP de cobrança
-          </label>
-          <input
+        <div className="space-y-1.5">
+          <Label htmlFor="cep">CEP de cobrança</Label>
+          <Input
+            id="cep"
             name="cep"
             type="text"
             inputMode="numeric"
             placeholder="00000-000"
             maxLength={9}
             required
-            className={inputClass}
           />
           <FieldError errors={state.errors?.cep} />
         </div>
-        <div>
-          <label className="block text-sm font-medium text-foreground mb-1.5">
-            Número
-          </label>
-          <input
+        <div className="space-y-1.5">
+          <Label htmlFor="numero_endereco">Número</Label>
+          <Input
+            id="numero_endereco"
             name="numero_endereco"
             type="text"
             placeholder="123"
             required
-            className={inputClass}
           />
           <FieldError errors={state.errors?.numero_endereco} />
         </div>
