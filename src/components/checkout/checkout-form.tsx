@@ -1,7 +1,8 @@
 "use client";
 
-import { useActionState } from "react";
+import { useState, useActionState } from "react";
 import { iniciarCheckoutAction, type CheckoutFormState } from "@/lib/checkout/actions";
+import { CreditCardForm } from "./credit-card-form";
 import { Button } from "@/components/ui/button";
 
 interface CheckoutFormProps {
@@ -18,6 +19,18 @@ export function CheckoutForm({ diagnosticoId }: CheckoutFormProps) {
     iniciarCheckoutAction,
     {}
   );
+  const [cpfCnpj, setCpfCnpj] = useState("");
+  const [showCardForm, setShowCardForm] = useState(false);
+
+  if (showCardForm) {
+    return (
+      <CreditCardForm
+        diagnosticoId={diagnosticoId}
+        cpfCnpj={cpfCnpj}
+        onVoltar={() => setShowCardForm(false)}
+      />
+    );
+  }
 
   return (
     <form action={action} className="space-y-6">
@@ -36,6 +49,8 @@ export function CheckoutForm({ diagnosticoId }: CheckoutFormProps) {
           type="text"
           required
           placeholder="000.000.000-00 ou 00.000.000/0001-00"
+          value={cpfCnpj}
+          onChange={(e) => setCpfCnpj(e.target.value)}
           className="w-full rounded-md border border-border bg-muted px-3 py-2.5 text-sm text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
         />
         <FieldError errors={state.errors?.cpf_cnpj} />
@@ -58,15 +73,20 @@ export function CheckoutForm({ diagnosticoId }: CheckoutFormProps) {
         </Button>
 
         <Button
-          type="submit"
-          name="metodo"
-          value="CREDIT_CARD"
+          type="button"
           size="lg"
           variant="outline"
           disabled={isPending}
           className="w-full cursor-pointer"
+          onClick={() => {
+            if (!cpfCnpj || cpfCnpj.replace(/\D/g, "").length < 11) {
+              alert("Preencha o CPF ou CNPJ antes de continuar.");
+              return;
+            }
+            setShowCardForm(true);
+          }}
         >
-          {isPending ? "Processando..." : "Pagar com cartão — R$ 29,90"}
+          Pagar com cartão — R$ 29,90
         </Button>
       </div>
     </form>

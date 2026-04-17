@@ -1,7 +1,7 @@
 "use server";
 
 import { redirect } from "next/navigation";
-import { checkoutSchema } from "./schemas";
+import { checkoutSchema, cartaoSchema } from "./schemas";
 import { createAsaasClient } from "@/lib/asaas/client";
 import {
   buscarDiagnosticoPorId,
@@ -119,7 +119,119 @@ export async function iniciarCheckoutAction(
   if (billingType === "PIX") {
     redirect(`/checkout/${diagnostico_id}/pix?payment=${asaasPayment.id}`);
   } else {
-    // Credit card: redirect to Asaas hosted checkout
     redirect(asaasPayment.invoiceUrl);
   }
+}
+
+export async function pagarComCartaoAction(
+  _prev: CheckoutFormState,
+  formData: FormData
+): Promise<CheckoutFormState> {
+  const raw = {
+    diagnostico_id: formData.get("diagnostico_id"),
+    cpf_cnpj: formData.get("cpf_cnpj"),
+    nome_titular: formData.get("nome_titular"),
+    numero_cartao: formData.get("numero_cartao"),
+    mes_validade: formData.get("mes_validade"),
+    ano_validade: formData.get("ano_validade"),
+    cvv: formData.get("cvv"),
+    cep: formData.get("cep"),
+    numero_endereco: formData.get("numero_endereco"),
+  };
+
+  const parsed = cartaoSchema.safeParse(raw);
+  if (!parsed.success) {
+    return {
+      errors: parsed.error.flatten().fieldErrors as Record<string, string[]>,
+    };
+  }
+
+  const { diagnostico_id, cpf_cnpj, nome_titular, numero_cartao, mes_validade, ano_validade, cvv, cep, numero_endereco } = parsed.data;
+
+  const diagnostico = await buscarDiagnosticoPorId(diagnostico_id);
+  if (!diagnostico) return { message: "Diagnóstico não encontrado." };
+  if (diagnostico.status === "pago" || diagnostico.status === "relatorio_enviado") {
+    redirect(`/relatorio/${diagnostico_id}`);
+  }
+  if (diagnostico.status !== "concluido") {
+    return { message: "Diagnóstico ainda não foi concluído." };
+  }
+
+  const asaas = createAsaasClient();
+  const cpfCnpjLimpo = limparCpfCnpj(cpf_cnpj);
+  const cepLimpo = cep.replace(/\D/g, "");
+  const numeroCartaoLimpo = numero_cartao.replace(/\s/g, "");
+
+  let asaasCustomerId: string;
+  try {
+    const existing = await asaas.buscarClientePorCpfCnpj(cpfCnpjLimpo);
+    if (existing) {
+      asaasCustomerId = existing.id;
+    } else {
+      const novo = await asaas.criarCliente({
+        name: diagnostico.nome_responsavel,
+        email: diagnostico.email,
+        phone: diagnostico.telefone ?? undefined,
+        cpfCnpj: cpfCnpjLimpo,
+        company: diagnostico.nome_empresa,
+        externalReference: diagnostico_id,
+      });
+      asaasCustomerId = novo.id;
+    }
+  } catch {
+    return { message: "Erro ao processar dados do cliente. Verifique o CPF/CNPJ." };
+  }
+
+  let asaasPayment;
+  try {
+    asaasPayment = await asaas.criarCobranca({
+      customer: asaasCustomerId,
+      billingType: "CREDIT_CARD",
+      value: VALOR_RELATORIO,
+      dueDate: formatarDataVencimento(),
+      description: "Raio-X Financeiro MARK V — Relatório Completo",
+      externalReference: diagnostico_id,
+      creditCard: {
+        holderName: nome_titular,
+        number: numeroCartaoLimpo,
+        expiryMonth: mes_validade,
+        expiryYear: ano_validade,
+        ccv: cvv,
+      },
+      creditCardHolderInfo: {
+        name: diagnostico.nome_responsavel,
+        email: diagnostico.email,
+        cpfCnpj: cpfCnpjLimpo,
+        postalCode: cepLimpo,
+        addressNumber: numero_endereco,
+        phone: diagnostico.telefone ?? undefined,
+      },
+    });
+  } catch (err) {
+    const msg = err instanceof Error ? err.message : "Erro ao processar cartão.";
+    if (msg.includes("Invalid creditCard")) return { message: "Dados do cartão inválidos. Verifique e tente novamente." };
+    if (msg.includes("DECLINED")) return { message: "Cartão recusado. Tente outro cartão." };
+    return { message: "Erro ao processar pagamento. Tente novamente." };
+  }
+
+  await criarPagamento({
+    diagnostico_id,
+    asaas_payment_id: asaasPayment.id,
+    asaas_customer_id: asaasCustomerId,
+    valor: VALOR_RELATORIO,
+    metodo: "credit_card",
+  });
+
+  // Credit card approved synchronously — trigger PDF and redirect
+  const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
+  fetch(`${appUrl}/api/pdf/gerar`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      "x-internal-token": process.env.PDF_INTERNAL_TOKEN ?? "dev-token-raioxfinanceiro",
+    },
+    body: JSON.stringify({ diagnosticoId: diagnostico_id }),
+  }).catch(() => {});
+
+  redirect(`/relatorio/${diagnostico_id}`);
 }

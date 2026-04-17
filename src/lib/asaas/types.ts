@@ -13,6 +13,23 @@ export interface AsaasCustomerRequest {
   externalReference?: string;
 }
 
+export interface AsaasCreditCard {
+  holderName: string;
+  number: string;
+  expiryMonth: string; // MM
+  expiryYear: string;  // YYYY
+  ccv: string;
+}
+
+export interface AsaasCreditCardHolderInfo {
+  name: string;
+  email: string;
+  cpfCnpj: string;
+  postalCode: string;
+  addressNumber: string;
+  phone?: string;
+}
+
 export interface AsaasPaymentRequest {
   customer: string;
   billingType: "PIX" | "CREDIT_CARD" | "BOLETO" | "UNDEFINED";
@@ -21,6 +38,8 @@ export interface AsaasPaymentRequest {
   description?: string;
   externalReference?: string;
   callbackSuccessUrl?: string;
+  creditCard?: AsaasCreditCard;
+  creditCardHolderInfo?: AsaasCreditCardHolderInfo;
 }
 
 // ---------------------------------------------------------------------------
