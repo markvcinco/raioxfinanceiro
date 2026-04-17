@@ -91,6 +91,7 @@ export async function iniciarCheckoutAction(
   const billingType = metodo as "PIX" | "CREDIT_CARD";
   let asaasPayment;
   try {
+    const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
     asaasPayment = await asaas.criarCobranca({
       customer: asaasCustomerId,
       billingType,
@@ -98,6 +99,7 @@ export async function iniciarCheckoutAction(
       dueDate: formatarDataVencimento(),
       description: "Raio-X Financeiro MARK V — Relatório Completo",
       externalReference: diagnostico_id,
+      callbackSuccessUrl: `${appUrl}/relatorio/${diagnostico_id}`,
     });
   } catch {
     return { message: "Erro ao criar cobrança. Tente novamente." };

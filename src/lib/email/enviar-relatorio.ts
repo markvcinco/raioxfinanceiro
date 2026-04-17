@@ -1,7 +1,7 @@
 import { Resend } from "resend";
 
 const FROM_EMAIL =
-  process.env.EMAIL_FROM ?? "Raio-X Financeiro <noreply@markv.com.br>";
+  process.env.EMAIL_FROM ?? "Raio-X Financeiro <onboarding@resend.dev>";
 
 /**
  * Envia o relatório PDF por e-mail para o responsável.

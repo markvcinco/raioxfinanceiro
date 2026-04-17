@@ -20,6 +20,7 @@ export interface AsaasPaymentRequest {
   dueDate: string; // YYYY-MM-DD
   description?: string;
   externalReference?: string;
+  callbackSuccessUrl?: string;
 }
 
 // ---------------------------------------------------------------------------
