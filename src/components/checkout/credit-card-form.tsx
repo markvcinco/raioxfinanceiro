@@ -72,9 +72,25 @@ export function CreditCardForm({ diagnosticoId, cpfCnpj, onVoltar }: CreditCardF
   return (
     <form action={action} onSubmit={handleSubmit} className="space-y-4">
       <input type="hidden" name="diagnostico_id" value={diagnosticoId} />
-      <input type="hidden" name="cpf_cnpj" value={cpfCnpj} />
       <input type="hidden" name="mes_validade" value="" />
       <input type="hidden" name="ano_validade" value="" />
+
+      {/* CPF/CNPJ */}
+      <div>
+        <label className="block text-sm font-medium text-foreground mb-1.5">
+          CPF ou CNPJ do titular
+        </label>
+        <input
+          name="cpf_cnpj"
+          type="text"
+          inputMode="numeric"
+          defaultValue={cpfCnpj}
+          placeholder="000.000.000-00 ou 00.000.000/0001-00"
+          required
+          className={inputClass}
+        />
+        <FieldError errors={state.errors?.cpf_cnpj} />
+      </div>
 
       {/* Card number */}
       <div>
