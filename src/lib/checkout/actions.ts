@@ -178,8 +178,10 @@ export async function pagarComCartaoAction(
       });
       asaasCustomerId = novo.id;
     }
-  } catch {
-    return { message: "Erro ao processar dados do cliente. Verifique o CPF/CNPJ." };
+  } catch (err) {
+    const detail = err instanceof Error ? err.message : String(err);
+    console.error("[checkout] Asaas customer error:", detail);
+    return { message: `Erro no cliente Asaas: ${detail}` };
   }
 
   let asaasPayment;
