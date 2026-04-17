@@ -5,6 +5,7 @@ import {
 } from "@/lib/supabase/queries";
 import { gerarUrlAssinada } from "@/lib/supabase/storage";
 import { Button } from "@/components/ui/button";
+import { AutoRefresh } from "@/components/relatorio/auto-refresh";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -50,10 +51,11 @@ export default async function RelatorioPage({ params }: PageProps) {
     );
   }
 
-  // State 2: Paid, PDF not yet generated
+  // State 2: Paid, PDF not yet generated — poll every 5s until ready
   if (diagnostico.status === "pago") {
     return (
       <main className="min-h-screen flex items-center justify-center px-4 py-12">
+        <AutoRefresh intervalMs={5000} />
         <div className="w-full max-w-md text-center">
           <p className="text-sm font-medium text-markv-light tracking-wider uppercase mb-2">
             Raio-X Financeiro

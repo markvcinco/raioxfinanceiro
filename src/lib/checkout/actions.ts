@@ -7,6 +7,7 @@ import {
   buscarDiagnosticoPorId,
   buscarPagamentoPorDiagnosticoId,
   criarPagamento,
+  confirmarPagamento,
 } from "@/lib/supabase/queries";
 
 const VALOR_RELATORIO = 29.9;
@@ -224,7 +225,10 @@ export async function pagarComCartaoAction(
     metodo: "credit_card",
   });
 
-  // Credit card approved synchronously — trigger PDF and redirect
+  // Credit card is approved synchronously — confirm immediately without waiting for webhook
+  await confirmarPagamento(asaasPayment.id, { source: "credit_card_sync" });
+
+  // Trigger PDF and redirect
   const appUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000";
   fetch(`${appUrl}/api/pdf/gerar`, {
     method: "POST",
