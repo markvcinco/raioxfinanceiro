@@ -4,7 +4,6 @@ export interface Area {
   readonly nome: string;
   readonly eixo: string;
   readonly peso: number;
-  readonly icone: string;
 }
 
 export type AreaId =
@@ -21,7 +20,6 @@ export const AREAS: readonly Area[] = [
     nome: "Gestão Financeira & Caixa",
     eixo: "Você enxerga o resultado real do negócio em tempo de decisão?",
     peso: 0.3,
-    icone: "🧮",
   },
   {
     id: "precificacao_receita",
@@ -29,7 +27,6 @@ export const AREAS: readonly Area[] = [
     nome: "Precificação & Receita",
     eixo: "Seu preço é decisão técnica ou chute confortável?",
     peso: 0.25,
-    icone: "💰",
   },
   {
     id: "vendas_previsibilidade",
@@ -37,7 +34,6 @@ export const AREAS: readonly Area[] = [
     nome: "Vendas & Previsibilidade",
     eixo: "Você projeta receita dos próximos 90 dias com confiança?",
     peso: 0.15,
-    icone: "📈",
   },
   {
     id: "operacao_margem",
@@ -45,7 +41,6 @@ export const AREAS: readonly Area[] = [
     nome: "Operação & Margem",
     eixo: "Você sabe a margem real por cliente, produto e operador?",
     peso: 0.15,
-    icone: "⚙️",
   },
   {
     id: "governanca_decisao",
@@ -53,6 +48,5 @@ export const AREAS: readonly Area[] = [
     nome: "Governança & Decisão",
     eixo: "Suas decisões são baseadas em dado ou em sentimento?",
     peso: 0.15,
-    icone: "🧭",
   },
 ] as const;

@@ -1,5 +1,25 @@
 import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+import {
+  Tooltip,
+  TooltipContent,
+  TooltipProvider,
+  TooltipTrigger,
+} from "@/components/ui/tooltip";
+import {
+  HoverCard,
+  HoverCardContent,
+  HoverCardTrigger,
+} from "@/components/ui/hover-card";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AREAS } from "@/content/areas";
+import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -36,12 +56,76 @@ const PASSOS = [
 ] as const;
 
 const RELATORIO_ITEMS = [
-  "Score geral e classificação da maturidade financeira",
-  "Análise individual das 5 áreas com diagnóstico por faixa",
-  "Os 3 pontos de maior fragilidade da sua gestão",
-  "Plano de ação personalizado para os próximos 90 dias",
-  "Radar visual comparativo entre as áreas",
+  {
+    titulo: "Score geral e classificação",
+    detalhe:
+      "Score de 0 a 100, faixa de maturidade (crítico, frágil, em construção, maduro) e interpretação do que isso significa para o seu negócio.",
+  },
+  {
+    titulo: "Análise individual das 5 áreas",
+    detalhe:
+      "Cada área avaliada com score próprio, copy exclusiva para a sua faixa e o custo real de ignorar o problema.",
+  },
+  {
+    titulo: "3 pontos de maior fragilidade",
+    detalhe:
+      "Os 3 gaps prioritários identificados no diagnóstico — onde sua gestão financeira está mais exposta hoje.",
+  },
+  {
+    titulo: "Plano de ação para 90 dias",
+    detalhe:
+      "Passos concretos, priorizados e sequenciados para os próximos 3 meses. Ritmo de PME, não de corporação.",
+  },
+  {
+    titulo: "Radar visual comparativo",
+    detalhe:
+      "Visualização gráfica das 5 áreas para identificar desequilíbrios de imediato.",
+  },
 ] as const;
+
+const FAQ = [
+  {
+    q: "Preciso informar dados financeiros da minha empresa?",
+    a: "Não. As perguntas são sobre como a gestão financeira é conduzida — processos, periodicidade, ferramentas — não sobre números da empresa. Nenhum dado confidencial é solicitado.",
+  },
+  {
+    q: "Quanto tempo leva o diagnóstico?",
+    a: "Entre 4 e 6 minutos. São 20 perguntas de múltipla escolha, sem texto livre.",
+  },
+  {
+    q: "O que vem no relatório de R$ 29,90?",
+    a: "PDF de 14 páginas com: score geral, análise detalhada das 5 áreas avaliadas, top 3 prioridades do seu diagnóstico, plano de ação para 90 dias e radar visual comparativo.",
+  },
+  {
+    q: "Como funciona o pagamento?",
+    a: "Pagamento único via PIX ou cartão de crédito. Sem assinatura, sem mensalidade. Processado pela Asaas com criptografia de ponta a ponta.",
+  },
+  {
+    q: "O score é confiável para uma empresa pequena?",
+    a: "Sim. O modelo foi calibrado especificamente para PMEs brasileiras com faturamento até R$ 20 milhões. As áreas e pesos refletem a realidade operacional desse perfil, não o de uma multinacional.",
+  },
+  {
+    q: "Quem desenvolveu o diagnóstico?",
+    a: "Lucas Minucci, fundador da MARK V. Mais de 10 anos em finanças, controladoria e conselho consultivo financeiro para PMEs. O modelo reflete o framework aplicado em consultorias da MARK V.",
+  },
+] as const;
+
+function PesoBadge({ peso }: { peso: number }) {
+  return (
+    <TooltipProvider delayDuration={200}>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <span className="inline-flex items-center px-2 py-0.5 rounded-full text-[10px] font-medium text-muted-foreground bg-muted/60 border border-border cursor-help tabular-nums">
+            {Math.round(peso * 100)}% peso
+          </span>
+        </TooltipTrigger>
+        <TooltipContent side="top">
+          Influência no score geral final
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
+}
 
 export default function Home() {
   return (
@@ -55,7 +139,7 @@ export default function Home() {
           </span>
         </div>
 
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl max-w-3xl mb-6">
+        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl max-w-3xl mb-6 leading-[1.05]">
           Sua empresa tem gestão financeira
           <br />
           <span className="text-markv-light">ou só paga as contas?</span>
@@ -66,8 +150,11 @@ export default function Home() {
           5 minutos. 20 perguntas, score imediato, diagnóstico completo.
         </p>
 
-        <Button asChild size="lg" className="px-8 text-base font-semibold cursor-pointer">
-          <Link href="/diagnostico">Fazer meu diagnóstico</Link>
+        <Button asChild size="lg" className="px-8 text-base font-semibold cursor-pointer group">
+          <Link href="/diagnostico">
+            Fazer meu diagnóstico
+            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+          </Link>
         </Button>
 
         <p className="text-xs text-muted-foreground mt-4">
@@ -75,18 +162,31 @@ export default function Home() {
         </p>
       </section>
 
+      <Separator />
+
       {/* Prova social */}
-      <section className="border-t border-border py-12 px-4">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            Desenvolvido por{" "}
-            <span className="text-foreground font-medium">Lucas Minucci</span>,
-            especialista em finanças, controladoria e conselho consultivo para
-            PMEs. Mais de 10 anos ajudando empresas a tomar decisões financeiras
-            com método.
-          </p>
+      <section className="py-14 px-4">
+        <div className="mx-auto max-w-2xl">
+          <div className="flex items-start gap-4">
+            <Avatar className="h-12 w-12 shrink-0">
+              <AvatarFallback>LM</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm text-foreground leading-relaxed">
+                Desenvolvido por{" "}
+                <span className="font-semibold">Lucas Minucci</span>, especialista
+                em finanças, controladoria e conselho consultivo para PMEs.
+              </p>
+              <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
+                Mais de 10 anos ajudando empresas a tomar decisões financeiras
+                com método.
+              </p>
+            </div>
+          </div>
         </div>
       </section>
+
+      <Separator />
 
       {/* Como funciona */}
       <section className="py-20 px-4">
@@ -95,10 +195,13 @@ export default function Home() {
             Como funciona
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-3">
             {PASSOS.map((passo) => (
-              <div key={passo.num} className="rounded-lg border border-border bg-card p-6">
-                <span className="text-xs font-semibold text-markv-light tracking-wider">
+              <div
+                key={passo.num}
+                className="rounded-lg border border-border bg-card p-6 transition-colors hover:border-zinc-700"
+              >
+                <span className="text-xs font-semibold text-markv-light tracking-wider tabular-nums">
                   PASSO {passo.num}
                 </span>
                 <h3 className="text-base font-semibold text-foreground mt-2 mb-3">
@@ -113,34 +216,34 @@ export default function Home() {
         </div>
       </section>
 
+      <Separator />
+
       {/* 5 áreas */}
-      <section className="py-20 px-4 border-t border-border">
+      <section className="py-20 px-4">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-2xl font-bold text-center mb-4">
             O que você vai descobrir
           </h2>
-          <p className="text-sm text-muted-foreground text-center mb-12 max-w-lg mx-auto">
+          <p className="text-sm text-muted-foreground text-center mb-12 max-w-lg mx-auto leading-relaxed">
             O diagnóstico avalia 5 áreas da maturidade financeira da sua empresa,
             cada uma com peso específico no score final.
           </p>
 
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {AREAS.map((area) => (
               <div
                 key={area.id}
-                className="rounded-lg border border-border bg-card p-5"
+                className="rounded-lg border border-border bg-card p-5 transition-colors hover:border-zinc-700 group"
               >
-                <div className="flex items-center gap-3 mb-3">
-                  <span className="text-xl">{area.icone}</span>
-                  <div>
-                    <h3 className="text-sm font-semibold text-foreground">
-                      {area.nome}
-                    </h3>
-                    <span className="text-xs text-muted-foreground">
-                      Peso: {Math.round(area.peso * 100)}%
-                    </span>
+                <div className="flex items-center justify-between mb-4">
+                  <div className="flex h-8 w-8 items-center justify-center rounded-md bg-markv/80 text-[11px] font-bold text-white tabular-nums">
+                    0{area.numero}
                   </div>
+                  <PesoBadge peso={area.peso} />
                 </div>
+                <h3 className="text-sm font-semibold text-foreground mb-2 leading-tight">
+                  {area.nome}
+                </h3>
                 <p className="text-xs text-muted-foreground leading-relaxed">
                   {area.eixo}
                 </p>
@@ -150,43 +253,49 @@ export default function Home() {
         </div>
       </section>
 
+      <Separator />
+
       {/* O que está no relatório */}
-      <section className="py-20 px-4 border-t border-border">
+      <section className="py-20 px-4">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold text-center mb-4">
             O que está no relatório
           </h2>
           <p className="text-sm text-muted-foreground text-center mb-10">
-            14 páginas de análise personalizada para a sua empresa.
+            14 páginas de análise personalizada. Passe o mouse em cada item para ver detalhes.
           </p>
 
-          <div className="space-y-4">
+          <div className="space-y-2">
             {RELATORIO_ITEMS.map((item, i) => (
-              <div key={i} className="flex items-start gap-3">
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-markv-light mt-0.5 shrink-0"
-                >
-                  <polyline points="20 6 9 17 4 12" />
-                </svg>
-                <p className="text-sm text-foreground">{item}</p>
-              </div>
+              <HoverCard key={i} openDelay={150} closeDelay={100}>
+                <HoverCardTrigger asChild>
+                  <div className="flex items-start gap-3 p-3 rounded-md border border-transparent hover:border-border hover:bg-card transition-all cursor-help">
+                    <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-markv/20 border border-markv/40">
+                      <Check className="h-3 w-3 text-markv-light" strokeWidth={3} />
+                    </div>
+                    <p className="text-sm text-foreground">{item.titulo}</p>
+                  </div>
+                </HoverCardTrigger>
+                <HoverCardContent>
+                  <p className="text-xs font-semibold text-markv-light uppercase tracking-wider mb-2">
+                    {item.titulo}
+                  </p>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    {item.detalhe}
+                  </p>
+                </HoverCardContent>
+              </HoverCard>
             ))}
           </div>
         </div>
       </section>
 
+      <Separator />
+
       {/* Preço */}
-      <section className="py-20 px-4 border-t border-border">
-        <div className="mx-auto max-w-md text-center">
-          <div className="rounded-xl border border-markv/50 bg-card p-8">
+      <section className="py-20 px-4">
+        <div className="mx-auto max-w-md">
+          <div className="rounded-xl border border-markv/50 bg-card p-8 text-center">
             <p className="text-xs font-semibold text-markv-light tracking-wider uppercase mb-4">
               Relatório completo
             </p>
@@ -199,7 +308,7 @@ export default function Home() {
             <Button asChild size="lg" className="w-full cursor-pointer font-semibold">
               <Link href="/diagnostico">Começar diagnóstico gratuito</Link>
             </Button>
-            <p className="text-xs text-muted-foreground mt-4">
+            <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
               O diagnóstico e o score são gratuitos.
               <br />
               Você só paga se quiser o relatório completo em PDF.
@@ -208,26 +317,56 @@ export default function Home() {
         </div>
       </section>
 
+      <Separator />
+
+      {/* FAQ */}
+      <section className="py-20 px-4">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="text-2xl font-bold text-center mb-4">
+            Perguntas frequentes
+          </h2>
+          <p className="text-sm text-muted-foreground text-center mb-10">
+            Tudo que você precisa saber antes de começar.
+          </p>
+
+          <Accordion type="single" collapsible className="w-full">
+            {FAQ.map((item, i) => (
+              <AccordionItem key={i} value={`item-${i}`}>
+                <AccordionTrigger>{item.q}</AccordionTrigger>
+                <AccordionContent>{item.a}</AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+      </section>
+
+      <Separator />
+
       {/* CTA final */}
-      <section className="py-20 px-4 border-t border-border text-center">
+      <section className="py-20 px-4 text-center">
         <div className="mx-auto max-w-lg">
           <h2 className="text-2xl font-bold mb-4">
             Pronto para descobrir?
           </h2>
-          <p className="text-sm text-muted-foreground mb-8">
+          <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
             5 minutos. 20 perguntas. Nenhuma informação sensível.
             <br />
             Você sai sabendo exatamente onde a gestão financeira da sua empresa
             está e o que fazer a respeito.
           </p>
-          <Button asChild size="lg" className="px-8 cursor-pointer font-semibold">
-            <Link href="/diagnostico">Fazer meu diagnóstico agora</Link>
+          <Button asChild size="lg" className="px-8 cursor-pointer font-semibold group">
+            <Link href="/diagnostico">
+              Fazer meu diagnóstico agora
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
           </Button>
         </div>
       </section>
 
+      <Separator />
+
       {/* Footer */}
-      <footer className="border-t border-border py-8 px-4">
+      <footer className="py-8 px-4">
         <div className="mx-auto max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
             <div className="h-4 w-0.5 rounded-full bg-markv" />
