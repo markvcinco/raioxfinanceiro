@@ -79,32 +79,68 @@ const PASSOS = [
   },
 ] as const;
 
-// ─── Unchanged data ──────────────────────────────────────────────────────────
+// ─── Block 5 data ────────────────────────────────────────────────────────────
+const PILARES_COMPASS = [
+  {
+    rotulo: "Raio-X",
+    ativo: true,
+    titulo: "Mapeamento dos vazamentos",
+    desc: "A maioria dos consultores olha o faturamento. Nós olhamos onde o dinheiro escapa. Precificação errada, custo escondido, margem que parece boa e não é.",
+  },
+  {
+    rotulo: "Rota",
+    ativo: false,
+    titulo: "Três cenários, uma escolha",
+    desc: "Conservador, realista, otimista. O empresário para de reagir ao mês e começa a tomar decisão com dado.",
+  },
+  {
+    rotulo: "Checkpoint",
+    ativo: false,
+    titulo: "Recalcula todo mês",
+    desc: "O plano não fica na gaveta. Funciona como GPS: corrige a rota quando você desvia.",
+  },
+  {
+    rotulo: "Blindagem",
+    ativo: false,
+    titulo: "Protege o que foi construído",
+    desc: "Acordo de sócios, governança, riscos mapeados. Lucro sem proteção é temporário.",
+  },
+] as const;
+
+// ─── Block 7 data ────────────────────────────────────────────────────────────
+const GRATUITO_ITEMS = [
+  "Score Compass de 0 a 100",
+  "Classificação na faixa de maturidade (crítico, frágil, em construção ou maduro)",
+  "Radar visual das 5 áreas avaliadas",
+  "Maior vulnerabilidade identificada no diagnóstico",
+] as const;
+
+// ─── Block 8 data ────────────────────────────────────────────────────────────
 const RELATORIO_ITEMS = [
   {
-    titulo: "Score geral e classificação",
+    titulo: "Score geral e classificação por faixa",
     detalhe:
-      "Score de 0 a 100, faixa de maturidade (crítico, frágil, em construção, maduro) e interpretação do que isso significa para o seu negócio.",
+      "Score de 0 a 100, faixa de maturidade e o que ela significa na prática do seu negócio. Não é um número solto.",
   },
   {
     titulo: "Análise individual das 5 áreas",
     detalhe:
-      "Cada área avaliada com score próprio, copy exclusiva para a sua faixa e o custo real de ignorar o problema.",
+      "Cada área com score próprio, diagnóstico para a sua faixa específica e o custo concreto de deixar o problema onde está.",
   },
   {
-    titulo: "3 pontos de maior fragilidade",
+    titulo: "Top 3 fragilidades do seu diagnóstico",
     detalhe:
-      "Os 3 gaps prioritários identificados no diagnóstico — onde sua gestão financeira está mais exposta hoje.",
+      "Os gaps que mais expõem o caixa hoje. Priorizados por impacto real, não por urgência aparente.",
   },
   {
     titulo: "Plano de ação para 90 dias",
     detalhe:
-      "Passos concretos, priorizados e sequenciados para os próximos 3 meses. Ritmo de PME, não de corporação.",
+      "Passos sequenciados para os próximos 3 meses. Ritmo de PME, não de palestra de consultor.",
   },
   {
     titulo: "Radar visual comparativo",
     detalhe:
-      "Visualização gráfica das 5 áreas para identificar desequilíbrios de imediato.",
+      "As 5 áreas em um gráfico só. Onde você está forte, onde está exposto, onde o dinheiro sangra silencioso.",
   },
 ] as const;
 
@@ -348,40 +384,81 @@ export default function Home() {
 
       <Separator />
 
-      {/* ── Placeholder: Autoridade (to be replaced in Block 9 task) ─────── */}
-      <section className="py-14 px-4">
-        <div className="mx-auto max-w-2xl">
-          <div className="flex items-start gap-4">
-            <Avatar className="h-12 w-12 shrink-0">
-              <AvatarFallback>LM</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="text-sm text-foreground leading-relaxed">
-                Desenvolvido por{" "}
-                <span className="font-semibold">Lucas Minucci</span>, especialista
-                em finanças, controladoria e conselho consultivo para PMEs.
-              </p>
-              <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
-                Mais de 10 anos ajudando empresas a tomar decisões financeiras
-                com método.
-              </p>
-            </div>
+      {/* ── Block 5: Método Compass ───────────────────────────────────────── */}
+      <section className="py-20 px-4">
+        <div className="mx-auto max-w-5xl">
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-bold mb-3">
+              O Raio-X é o primeiro passo da bússola.
+            </h2>
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              A maioria dos donos de PME não precisa trabalhar mais. Precisa de
+              direção. O Método Compass tem 4 pilares que corrigem o que está
+              travando o negócio.
+            </p>
+          </div>
+
+          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {PILARES_COMPASS.map((pilar, i) => (
+              <div
+                key={pilar.rotulo}
+                className={
+                  pilar.ativo
+                    ? "rounded-lg border border-markv/60 bg-markv/5 p-5"
+                    : "rounded-lg border border-border bg-card p-5"
+                }
+              >
+                <div className="flex items-center gap-2 mb-3">
+                  <span className="text-[10px] font-bold text-muted-foreground tabular-nums">
+                    0{i + 1}
+                  </span>
+                  <span
+                    className={
+                      pilar.ativo
+                        ? "text-xs font-bold tracking-wider text-markv-light"
+                        : "text-xs font-bold tracking-wider text-foreground"
+                    }
+                  >
+                    {pilar.rotulo}
+                  </span>
+                  {pilar.ativo && (
+                    <span className="text-[9px] font-semibold text-markv-light bg-markv/10 border border-markv/30 px-1.5 py-0.5 rounded-full">
+                      você está aqui
+                    </span>
+                  )}
+                </div>
+                <h3 className="text-sm font-semibold text-foreground mb-2 leading-tight">
+                  {pilar.titulo}
+                </h3>
+                <p
+                  className={
+                    pilar.ativo
+                      ? "text-xs text-muted-foreground leading-relaxed"
+                      : "text-xs text-muted-foreground/70 leading-relaxed"
+                  }
+                >
+                  {pilar.desc}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <Separator />
 
-      {/* ── Placeholder: 5 áreas (to be replaced in Block 6 task) ───────── */}
+      {/* ── Block 6: 5 áreas avaliadas ────────────────────────────────────── */}
       <section className="py-20 px-4">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold text-center mb-4">
-            O que você vai descobrir
-          </h2>
-          <p className="text-sm text-muted-foreground text-center mb-12 max-w-lg mx-auto leading-relaxed">
-            O diagnóstico avalia 5 áreas da maturidade financeira da sua empresa,
-            cada uma com peso específico no score final.
-          </p>
+          <div className="text-center mb-12">
+            <h2 className="text-2xl font-bold mb-3 max-w-2xl mx-auto leading-tight">
+              Não olhamos o seu faturamento. Olhamos onde o dinheiro escapa.
+            </h2>
+            <p className="text-sm text-muted-foreground max-w-lg mx-auto leading-relaxed">
+              O diagnóstico avalia 5 áreas que a maioria dos donos de PME só
+              enxerga depois que o estrago está feito.
+            </p>
+          </div>
 
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {AREAS.map((area) => (
@@ -409,15 +486,56 @@ export default function Home() {
 
       <Separator />
 
-      {/* ── Placeholder: Relatório (to be replaced in Block 8 task) ─────── */}
+      {/* ── Block 7: O que você recebe grátis ─────────────────────────────── */}
+      <section className="py-20 px-4">
+        <div className="mx-auto max-w-xl">
+          <div className="text-center mb-8">
+            <p className="text-xs font-semibold text-markv-light tracking-wider uppercase mb-2">
+              Sem custo
+            </p>
+            <h2 className="text-2xl font-bold mb-3">
+              O que você vê antes de pagar qualquer coisa
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Resultado imediato. Sem cadastro. Sem cartão.
+            </p>
+          </div>
+
+          <div className="rounded-lg border border-markv/30 bg-markv/5 p-6">
+            <ul className="space-y-3">
+              {GRATUITO_ITEMS.map((item) => (
+                <li
+                  key={item}
+                  className="flex items-start gap-3 text-sm text-foreground"
+                >
+                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-markv/20 border border-markv/40">
+                    <Check
+                      className="h-3 w-3 text-markv-light"
+                      strokeWidth={3}
+                    />
+                  </div>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* ── Block 8: O que vem no relatório completo ──────────────────────── */}
       <section className="py-20 px-4">
         <div className="mx-auto max-w-2xl">
-          <h2 className="text-2xl font-bold text-center mb-4">
-            O que está no relatório
-          </h2>
-          <p className="text-sm text-muted-foreground text-center mb-10">
-            14 páginas de análise personalizada. Passe o mouse em cada item para ver detalhes.
-          </p>
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold mb-3">
+              O relatório completo
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              14 páginas. Instrumento de trabalho, não peça de apresentação.
+              Passe o cursor em cada item para ver o detalhe.
+            </p>
+          </div>
 
           <div className="space-y-2">
             {RELATORIO_ITEMS.map((item, i) => (
@@ -440,6 +558,30 @@ export default function Home() {
                 </HoverCardContent>
               </HoverCard>
             ))}
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* ── Placeholder: Autoridade (to be replaced in Block 9 task) ─────── */}
+      <section className="py-14 px-4">
+        <div className="mx-auto max-w-2xl">
+          <div className="flex items-start gap-4">
+            <Avatar className="h-12 w-12 shrink-0">
+              <AvatarFallback>LM</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm text-foreground leading-relaxed">
+                Desenvolvido por{" "}
+                <span className="font-semibold">Lucas Minucci</span>, especialista
+                em finanças, controladoria e conselho consultivo para PMEs.
+              </p>
+              <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
+                Mais de 10 anos ajudando empresas a tomar decisões financeiras
+                com método.
+              </p>
+            </div>
           </div>
         </div>
       </section>
