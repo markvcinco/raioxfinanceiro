@@ -24,37 +24,62 @@ import Link from "next/link";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Raio-X Financeiro — Diagnóstico da Maturidade Financeira | MARK V",
+  title: "Raio-X Compass: onde o dinheiro escapa na sua PME",
   description:
-    "Descubra o nível de maturidade financeira da sua empresa em menos de 5 minutos. 20 perguntas, score imediato, relatório completo em PDF. Desenvolvido pela MARK V.",
+    "Score de maturidade financeira de 0 a 100. 20 perguntas, menos de 5 minutos, resultado imediato. Diagnóstico completo das 5 áreas críticas. Desenvolvido pela MARK V.",
   openGraph: {
-    title: "Raio-X Financeiro — Diagnóstico Financeiro para PMEs",
+    title: "Raio-X Compass | Diagnóstico Financeiro para PMEs",
     description:
-      "20 perguntas. Score imediato. Relatório completo em PDF por R$ 29,90. Descubra onde sua gestão financeira está travando.",
+      "Seu faturamento cresceu. O lucro não acompanhou. O Raio-X Compass mostra onde o dinheiro escapa. Score imediato, relatório completo em PDF.",
     type: "website",
     locale: "pt_BR",
-    siteName: "Raio-X Financeiro MARK V",
+    siteName: "Raio-X Financeiro Compass | MARK V",
   },
 };
 
+// ─── Block 2 data ────────────────────────────────────────────────────────────
+const SCORE_PREVIEW_AREAS: Array<{
+  nome: string;
+  score: number;
+  critico: boolean;
+}> = [
+  { nome: "Gestão Financeira & Caixa", score: 52, critico: false },
+  { nome: "Precificação & Receita", score: 28, critico: true },
+  { nome: "Vendas & Previsibilidade", score: 45, critico: false },
+  { nome: "Operação & Margem", score: 60, critico: false },
+  { nome: "Governança & Decisão", score: 32, critico: false },
+];
+
+// ─── Block 3 data ────────────────────────────────────────────────────────────
+const SINTOMAS = [
+  "Meu faturamento aumentou, mas no fim do mês não sobra o que deveria",
+  "Fico sem saber se estou cobrando pouco ou perdendo margem em algum lugar",
+  "Decido no feeling porque não tenho os números na mão quando preciso",
+  "Já tentei consultoria. Recebi um relatório bonito. Nada mudou na prática",
+  "A empresa me consome. Era pra ser liberdade, virou obrigação",
+  "Se meu sócio resolver sair amanhã, a divisão vira um problema sério",
+] as const;
+
+// ─── Block 4 data ────────────────────────────────────────────────────────────
 const PASSOS = [
   {
     num: "01",
     titulo: "Responda 20 perguntas",
-    desc: "Sobre a gestão financeira, precificação, vendas, operação e governança da sua empresa. Leva menos de 5 minutos.",
+    desc: "Sobre como você gere o negócio, não sobre seus números. Gestão, precificação, vendas, operação e governança. Leva menos de 5 minutos.",
   },
   {
     num: "02",
-    titulo: "Veja seu score na hora",
-    desc: "Score geral de 0 a 100, classificação por faixa de maturidade e radar comparativo das 5 áreas — gratuito.",
+    titulo: "Veja seu Score Compass",
+    desc: "Score de 0 a 100, classificação na faixa de maturidade e radar das 5 áreas. Resultado imediato, gratuito, sem cadastro.",
   },
   {
     num: "03",
     titulo: "Baixe o relatório completo",
-    desc: "PDF de 14 páginas com análise detalhada de cada área, top 3 prioridades e plano de ação para 90 dias. R$ 29,90.",
+    desc: "PDF de 14 páginas com análise detalhada de cada área, top 3 prioridades e plano de ação para 90 dias.",
   },
 ] as const;
 
+// ─── Unchanged data ──────────────────────────────────────────────────────────
 const RELATORIO_ITEMS = [
   {
     titulo: "Score geral e classificação",
@@ -130,7 +155,8 @@ function PesoBadge({ peso }: { peso: number }) {
 export default function Home() {
   return (
     <main className="min-h-screen">
-      {/* Hero */}
+
+      {/* ── Block 1: Hero ─────────────────────────────────────────────────── */}
       <section className="flex flex-col items-center justify-center px-4 pt-24 pb-20 text-center">
         <div className="flex items-center gap-2 mb-8">
           <div className="h-6 w-1 rounded-full bg-markv" />
@@ -140,60 +166,164 @@ export default function Home() {
         </div>
 
         <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl max-w-3xl mb-6 leading-[1.05]">
-          Sua empresa tem gestão financeira
+          Seu faturamento cresceu.
           <br />
-          <span className="text-markv-light">ou só paga as contas?</span>
+          <span className="text-markv-light">O lucro não acompanhou.</span>
         </h1>
 
         <p className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed">
-          Descubra o nível de maturidade financeira do seu negócio em menos de
-          5 minutos. 20 perguntas, score imediato, diagnóstico completo.
+          O Raio-X Compass identifica onde o dinheiro está escapando.
+          20 perguntas, score de 0 a 100, resultado em menos de 5 minutos.
         </p>
 
-        <Button asChild size="lg" className="px-8 text-base font-semibold cursor-pointer group">
+        <Button
+          asChild
+          size="lg"
+          className="px-8 text-base font-semibold cursor-pointer group"
+        >
           <Link href="/diagnostico">
-            Fazer meu diagnóstico
+            Quero ver meu Score Compass
             <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </Button>
 
         <p className="text-xs text-muted-foreground mt-4">
-          Gratuito até o resultado. Relatório completo por R$ 29,90.
+          Gratuito até o resultado. Nenhum dado financeiro solicitado.
         </p>
       </section>
 
       <Separator />
 
-      {/* Prova social */}
-      <section className="py-14 px-4">
+      {/* ── Block 2: Score Preview ────────────────────────────────────────── */}
+      <section className="py-20 px-4">
         <div className="mx-auto max-w-2xl">
-          <div className="flex items-start gap-4">
-            <Avatar className="h-12 w-12 shrink-0">
-              <AvatarFallback>LM</AvatarFallback>
-            </Avatar>
-            <div>
-              <p className="text-sm text-foreground leading-relaxed">
-                Desenvolvido por{" "}
-                <span className="font-semibold">Lucas Minucci</span>, especialista
-                em finanças, controladoria e conselho consultivo para PMEs.
+          <div className="text-center mb-10">
+            <p className="text-xs font-semibold text-markv-light tracking-wider uppercase mb-2">
+              Exemplo de resultado
+            </p>
+            <h2 className="text-2xl font-bold mb-3">
+              É isso que você vê ao terminar o diagnóstico
+            </h2>
+            <p className="text-sm text-muted-foreground">
+              Score imediato. Classificação. Radar das 5 áreas. Sem cadastro, sem espera.
+            </p>
+          </div>
+
+          {/* Mockup card */}
+          <div className="rounded-xl border border-border bg-card p-6 sm:p-8">
+            {/* Score header */}
+            <div className="flex items-start justify-between mb-6">
+              <div>
+                <p className="text-[10px] font-semibold text-markv-light tracking-widest uppercase">
+                  Score Compass
+                </p>
+                <div className="flex items-baseline gap-2 mt-1">
+                  <span className="text-5xl font-bold tabular-nums">43</span>
+                  <span className="text-lg text-muted-foreground">/100</span>
+                </div>
+              </div>
+              <div className="text-right">
+                <span className="inline-block px-2.5 py-1 rounded-md bg-orange-500/10 border border-orange-500/30 text-orange-400 text-xs font-semibold">
+                  Frágil
+                </span>
+                <p className="text-xs text-muted-foreground mt-2 max-w-[180px] leading-snug">
+                  Empresa funcionando no improviso
+                </p>
+              </div>
+            </div>
+
+            <Separator className="mb-5" />
+
+            {/* Area breakdown */}
+            <div className="space-y-3 mb-5">
+              {SCORE_PREVIEW_AREAS.map((area) => (
+                <div key={area.nome}>
+                  <div className="flex items-center justify-between mb-1.5">
+                    <div className="flex items-center gap-2">
+                      <span className="text-[11px] text-muted-foreground">
+                        {area.nome}
+                      </span>
+                      {area.critico && (
+                        <span className="text-[9px] font-semibold text-orange-400 uppercase tracking-wide">
+                          crítico
+                        </span>
+                      )}
+                    </div>
+                    <span className="text-[11px] font-semibold tabular-nums">
+                      {area.score}
+                    </span>
+                  </div>
+                  <div className="h-1 rounded-full bg-muted overflow-hidden">
+                    <div
+                      className={
+                        area.critico
+                          ? "h-full rounded-full bg-orange-500"
+                          : "h-full rounded-full bg-markv"
+                      }
+                      style={{ width: `${area.score}%` }}
+                    />
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <Separator className="mb-4" />
+
+            {/* Biggest risk */}
+            <div className="rounded-md bg-muted/40 border border-border p-3">
+              <p className="text-[10px] font-semibold text-markv-light uppercase tracking-wider mb-1">
+                Maior fragilidade identificada
               </p>
-              <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
-                Mais de 10 anos ajudando empresas a tomar decisões financeiras
-                com método.
+              <p className="text-xs text-muted-foreground leading-relaxed">
+                Precificação sem base técnica. Você não sabe o custo real do
+                que vende. Sua margem pode estar errada há mais tempo do que
+                você imagina.
               </p>
             </div>
+          </div>
+
+          <p className="text-center text-xs text-muted-foreground mt-3">
+            Resultado ilustrativo. O seu será gerado com base nas suas respostas.
+          </p>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* ── Block 3: Symptoms ─────────────────────────────────────────────── */}
+      <section className="py-20 px-4">
+        <div className="mx-auto max-w-2xl">
+          <h2 className="text-2xl font-bold text-center mb-10">
+            Se uma dessas frases soa familiar, o diagnóstico foi feito pra você.
+          </h2>
+
+          <div className="grid gap-3 sm:grid-cols-2">
+            {SINTOMAS.map((sintoma) => (
+              <div
+                key={sintoma}
+                className="flex items-start gap-3 rounded-lg border border-border bg-card p-4"
+              >
+                <div className="mt-1.5 h-1.5 w-1.5 rounded-full bg-markv/60 shrink-0" />
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {sintoma}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       <Separator />
 
-      {/* Como funciona */}
+      {/* ── Block 4: How it works ─────────────────────────────────────────── */}
       <section className="py-20 px-4">
         <div className="mx-auto max-w-4xl">
-          <h2 className="text-2xl font-bold text-center mb-12">
+          <h2 className="text-2xl font-bold text-center mb-3">
             Como funciona
           </h2>
+          <p className="text-sm text-muted-foreground text-center mb-12">
+            Três passos. Menos de 5 minutos. Resultado na hora.
+          </p>
 
           <div className="grid gap-4 md:grid-cols-3">
             {PASSOS.map((passo) => (
@@ -218,7 +348,31 @@ export default function Home() {
 
       <Separator />
 
-      {/* 5 áreas */}
+      {/* ── Placeholder: Autoridade (to be replaced in Block 9 task) ─────── */}
+      <section className="py-14 px-4">
+        <div className="mx-auto max-w-2xl">
+          <div className="flex items-start gap-4">
+            <Avatar className="h-12 w-12 shrink-0">
+              <AvatarFallback>LM</AvatarFallback>
+            </Avatar>
+            <div>
+              <p className="text-sm text-foreground leading-relaxed">
+                Desenvolvido por{" "}
+                <span className="font-semibold">Lucas Minucci</span>, especialista
+                em finanças, controladoria e conselho consultivo para PMEs.
+              </p>
+              <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
+                Mais de 10 anos ajudando empresas a tomar decisões financeiras
+                com método.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* ── Placeholder: 5 áreas (to be replaced in Block 6 task) ───────── */}
       <section className="py-20 px-4">
         <div className="mx-auto max-w-4xl">
           <h2 className="text-2xl font-bold text-center mb-4">
@@ -255,7 +409,7 @@ export default function Home() {
 
       <Separator />
 
-      {/* O que está no relatório */}
+      {/* ── Placeholder: Relatório (to be replaced in Block 8 task) ─────── */}
       <section className="py-20 px-4">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold text-center mb-4">
@@ -292,7 +446,7 @@ export default function Home() {
 
       <Separator />
 
-      {/* Preço */}
+      {/* ── Placeholder: Preço (to be replaced in Block 11 task) ─────────── */}
       <section className="py-20 px-4">
         <div className="mx-auto max-w-md">
           <div className="rounded-xl border border-markv/50 bg-card p-8 text-center">
@@ -319,7 +473,7 @@ export default function Home() {
 
       <Separator />
 
-      {/* FAQ */}
+      {/* ── Placeholder: FAQ (to be replaced in Block 12 task) ───────────── */}
       <section className="py-20 px-4">
         <div className="mx-auto max-w-2xl">
           <h2 className="text-2xl font-bold text-center mb-4">
@@ -342,21 +496,24 @@ export default function Home() {
 
       <Separator />
 
-      {/* CTA final */}
+      {/* ── Placeholder: CTA final (to be replaced in Block 12 task) ─────── */}
       <section className="py-20 px-4 text-center">
         <div className="mx-auto max-w-lg">
           <h2 className="text-2xl font-bold mb-4">
-            Pronto para descobrir?
+            5 minutos. Score imediato. Você sai sabendo onde está.
           </h2>
           <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
-            5 minutos. 20 perguntas. Nenhuma informação sensível.
+            Nenhum dado financeiro solicitado. Nenhuma informação confidencial.
             <br />
-            Você sai sabendo exatamente onde a gestão financeira da sua empresa
-            está e o que fazer a respeito.
+            Só 20 perguntas sobre como você gere o negócio hoje.
           </p>
-          <Button asChild size="lg" className="px-8 cursor-pointer font-semibold group">
+          <Button
+            asChild
+            size="lg"
+            className="px-8 cursor-pointer font-semibold group"
+          >
             <Link href="/diagnostico">
-              Fazer meu diagnóstico agora
+              Quero ver meu Score Compass
               <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           </Button>
@@ -365,7 +522,7 @@ export default function Home() {
 
       <Separator />
 
-      {/* Footer */}
+      {/* ── Footer ────────────────────────────────────────────────────────── */}
       <footer className="py-8 px-4">
         <div className="mx-auto max-w-4xl flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-muted-foreground">
           <div className="flex items-center gap-2">
