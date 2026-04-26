@@ -48,7 +48,7 @@ async function asaasFetch<T>(
   const apiKey = getApiKey();
 
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15_000);
+  const timeout = setTimeout(() => controller.abort(), 10_000);
 
   try {
     console.log(`[asaas] ${options.method ?? "GET"} ${path}`);

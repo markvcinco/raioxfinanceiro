@@ -1,5 +1,7 @@
 "use server";
 
+export const maxDuration = 60;
+
 import { redirect } from "next/navigation";
 import { checkoutSchema, cartaoSchema } from "./schemas";
 import { createAsaasClient } from "@/lib/asaas/client";
