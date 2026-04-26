@@ -144,30 +144,68 @@ const RELATORIO_ITEMS = [
   },
 ] as const;
 
+// ─── Block 9 data ────────────────────────────────────────────────────────────
+const LUCAS_CREDENCIAIS = [
+  "Engenheiro de Produção e MBA em Finanças",
+  "Mais de 10 anos em finanças, controladoria e conselho consultivo para PMEs",
+  "Ex-sócio da Sense (controladoria)",
+  "Professor na PIB The New College",
+  "Conselheiro consultivo financeiro em empresas de médio porte",
+  "Fundador da MARK V",
+] as const;
+
+// ─── Block 10 data ───────────────────────────────────────────────────────────
+const CASOS = [
+  {
+    contexto: "Crise de caixa",
+    caso: "Empresa com R$ 8M de faturamento e quatro meses seguidos de caixa negativo. Em 60 dias, identificamos o gargalo: prazo de recebimento desalinhado com prazo de pagamento aos fornecedores. Caixa positivo no terceiro mês.",
+  },
+  {
+    contexto: "Acordo de sócios",
+    caso: "Três sócios, R$ 7M de faturamento, sem acordo formal havia quatro anos. Estruturamos cláusulas de saída, sucessão e impasse em 45 dias. Documento assinado antes do primeiro atrito sério.",
+  },
+  {
+    contexto: "Precificação corrigida",
+    caso: "Indústria leve com 80 SKUs. Identificamos 11 pontos percentuais de margem perdidos por custo unitário mal calculado. Revisão de preço aplicada em 90 dias, sem perda de cliente relevante.",
+  },
+] as const;
+
+// ─── Block 11 data ───────────────────────────────────────────────────────────
+const ANCORAS = [
+  "Uma decisão de precificação errada custa entre 5 e 15 pontos percentuais de margem por ano.",
+  "Uma hora de consultoria financeira sênior custa entre R$ 350 e R$ 800.",
+  "O relatório Compass custa R$ 29,90.",
+] as const;
+
+// ─── Block 12 data ───────────────────────────────────────────────────────────
 const FAQ = [
   {
-    q: "Preciso informar dados financeiros da minha empresa?",
-    a: "Não. As perguntas são sobre como a gestão financeira é conduzida — processos, periodicidade, ferramentas — não sobre números da empresa. Nenhum dado confidencial é solicitado.",
+    q: "Isso é só mais um quiz online?",
+    a: "Não. As 20 perguntas foram calibradas para PMEs brasileiras com faturamento entre R$ 1M e R$ 20M, com pesos por área que refletem o impacto real no caixa. O score não é humor do dia. É um modelo aplicado em consultoria de verdade.",
   },
   {
-    q: "Quanto tempo leva o diagnóstico?",
-    a: "Entre 4 e 6 minutos. São 20 perguntas de múltipla escolha, sem texto livre.",
+    q: "Preciso abrir os números da minha empresa?",
+    a: "Não. As perguntas são sobre como você gere o negócio, não sobre seus números. Processos, periodicidade, ferramentas, critério de decisão. Nenhum dado financeiro confidencial é solicitado.",
   },
   {
-    q: "O que vem no relatório de R$ 29,90?",
-    a: "PDF de 14 páginas com: score geral, análise detalhada das 5 áreas avaliadas, top 3 prioridades do seu diagnóstico, plano de ação para 90 dias e radar visual comparativo.",
+    q: "E se meu score vier muito baixo?",
+    a: "Score baixo é informação, não veredicto. O relatório completo aponta exatamente quais são as 3 fragilidades prioritárias e o que fazer nos próximos 90 dias. Score baixo é o motivo para começar, não para desistir.",
+  },
+  {
+    q: "Meu contador não cuida disso?",
+    a: "Contador cuida do imposto, da folha e da apuração contábil. Não é função dele projetar caixa, revisar precificação, estruturar governança ou apontar onde a margem está vazando. São camadas diferentes do mesmo negócio.",
+  },
+  {
+    q: "Vale R$ 29,90?",
+    a: "Uma hora de consultoria financeira sênior custa entre R$ 350 e R$ 800. Uma decisão de precificação errada custa muito mais que isso por ano. O relatório de R$ 29,90 entrega o diagnóstico que você usaria como ponto de partida em qualquer engajamento sério.",
   },
   {
     q: "Como funciona o pagamento?",
-    a: "Pagamento único via PIX ou cartão de crédito. Sem assinatura, sem mensalidade. Processado pela Asaas com criptografia de ponta a ponta.",
-  },
-  {
-    q: "O score é confiável para uma empresa pequena?",
-    a: "Sim. O modelo foi calibrado especificamente para PMEs brasileiras com faturamento até R$ 20 milhões. As áreas e pesos refletem a realidade operacional desse perfil, não o de uma multinacional.",
+    a: "PIX ou cartão de crédito. Pagamento único. Sem assinatura, sem mensalidade. Processado pela Asaas com criptografia ponta a ponta.",
   },
   {
     q: "Quem desenvolveu o diagnóstico?",
-    a: "Lucas Minucci, fundador da MARK V. Mais de 10 anos em finanças, controladoria e conselho consultivo financeiro para PMEs. O modelo reflete o framework aplicado em consultorias da MARK V.",
+    a: "Lucas Minucci, fundador da MARK V. Mais de 10 anos em finanças, controladoria e conselho consultivo financeiro para PMEs. O modelo reflete o framework aplicado nas consultorias da MARK V.",
   },
 ] as const;
 
@@ -564,22 +602,60 @@ export default function Home() {
 
       <Separator />
 
-      {/* ── Placeholder: Autoridade (to be replaced in Block 9 task) ─────── */}
-      <section className="py-14 px-4">
-        <div className="mx-auto max-w-2xl">
-          <div className="flex items-start gap-4">
-            <Avatar className="h-12 w-12 shrink-0">
-              <AvatarFallback>LM</AvatarFallback>
-            </Avatar>
+      {/* ── Block 9: Autoridade ───────────────────────────────────────────── */}
+      <section className="py-20 px-4">
+        <div className="mx-auto max-w-3xl">
+          <h2 className="text-2xl font-bold text-center mb-10">
+            Quem desenvolveu o Raio-X Compass
+          </h2>
+
+          <div className="grid gap-8 md:grid-cols-[auto_1fr] md:items-start">
+            <div className="flex flex-col items-center md:items-start gap-3">
+              <Avatar className="h-16 w-16">
+                <AvatarFallback className="text-base font-semibold">
+                  LM
+                </AvatarFallback>
+              </Avatar>
+              <div className="text-center md:text-left">
+                <p className="text-sm font-semibold text-foreground">
+                  Lucas Minucci
+                </p>
+                <p className="text-xs text-muted-foreground">
+                  Fundador, MARK V
+                </p>
+              </div>
+            </div>
+
             <div>
-              <p className="text-sm text-foreground leading-relaxed">
-                Desenvolvido por{" "}
-                <span className="font-semibold">Lucas Minucci</span>, especialista
-                em finanças, controladoria e conselho consultivo para PMEs.
+              <p className="text-sm text-foreground leading-relaxed mb-5">
+                Lucas Minucci é especialista em finanças, controladoria e
+                conselho consultivo financeiro para PMEs. Mais de 10 anos
+                estruturando a gestão financeira de empresas com faturamento
+                entre R$ 1M e R$ 20M.
               </p>
-              <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed">
-                Mais de 10 anos ajudando empresas a tomar decisões financeiras
-                com método.
+
+              <ul className="space-y-2 mb-5">
+                {LUCAS_CREDENCIAIS.map((cred) => (
+                  <li
+                    key={cred}
+                    className="flex items-start gap-2 text-sm text-muted-foreground"
+                  >
+                    <div className="mt-1 flex h-4 w-4 shrink-0 items-center justify-center rounded-full bg-markv/20 border border-markv/40">
+                      <Check
+                        className="h-2.5 w-2.5 text-markv-light"
+                        strokeWidth={3}
+                      />
+                    </div>
+                    {cred}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="text-xs text-muted-foreground leading-relaxed border-l-2 border-markv/40 pl-3">
+                O Raio-X Compass foi construído a partir do mesmo framework que
+                a MARK V aplica nas consultorias. Não é um questionário
+                genérico. É o diagnóstico que a gente faria antes de qualquer
+                engajamento.
               </p>
             </div>
           </div>
@@ -588,26 +664,117 @@ export default function Home() {
 
       <Separator />
 
-      {/* ── Placeholder: Preço (to be replaced in Block 11 task) ─────────── */}
+      {/* ── Block 10: Prova de processo ───────────────────────────────────── */}
       <section className="py-20 px-4">
-        <div className="mx-auto max-w-md">
-          <div className="rounded-xl border border-markv/50 bg-card p-8 text-center">
+        <div className="mx-auto max-w-4xl">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold mb-3">
+              O método funciona antes de virar produto.
+            </h2>
+            <p className="text-sm text-muted-foreground max-w-xl mx-auto leading-relaxed">
+              O Raio-X Compass é a sistematização de um framework aplicado em
+              consultorias reais. Estes são casos que aconteceram antes do
+              software existir.
+            </p>
+          </div>
+
+          <div className="grid gap-4 md:grid-cols-3">
+            {CASOS.map((caso) => (
+              <div
+                key={caso.contexto}
+                className="rounded-lg border border-border bg-card p-5"
+              >
+                <p className="text-[10px] font-semibold text-markv-light uppercase tracking-wider mb-3">
+                  {caso.contexto}
+                </p>
+                <p className="text-sm text-muted-foreground leading-relaxed">
+                  {caso.caso}
+                </p>
+              </div>
+            ))}
+          </div>
+
+          <p className="text-center text-xs text-muted-foreground mt-8 max-w-md mx-auto">
+            Casos reais da consultoria MARK V. Detalhes alterados para
+            preservar o anonimato dos clientes.
+          </p>
+        </div>
+      </section>
+
+      <Separator />
+
+      {/* ── Block 11: Oferta e preço ──────────────────────────────────────── */}
+      <section className="py-20 px-4">
+        <div className="mx-auto max-w-2xl">
+          <div className="text-center mb-10">
+            <h2 className="text-2xl font-bold mb-3 leading-tight">
+              Menos que uma hora de consultoria. Menos que uma decisão errada
+              por mês.
+            </h2>
+            <p className="text-sm text-muted-foreground max-w-lg mx-auto">
+              O custo do relatório fica claro quando você compara com o que
+              está deixando passar todo mês.
+            </p>
+          </div>
+
+          {/* Anchor list */}
+          <ul className="space-y-2 mb-10 max-w-lg mx-auto">
+            {ANCORAS.map((ancora, i) => (
+              <li
+                key={ancora}
+                className={
+                  i === ANCORAS.length - 1
+                    ? "flex items-start gap-3 rounded-md border border-markv/40 bg-markv/5 p-3"
+                    : "flex items-start gap-3 rounded-md border border-border bg-card p-3"
+                }
+              >
+                <span
+                  className={
+                    i === ANCORAS.length - 1
+                      ? "text-[11px] font-bold text-markv-light tabular-nums mt-0.5"
+                      : "text-[11px] font-bold text-muted-foreground tabular-nums mt-0.5"
+                  }
+                >
+                  0{i + 1}
+                </span>
+                <p
+                  className={
+                    i === ANCORAS.length - 1
+                      ? "text-sm text-foreground leading-relaxed"
+                      : "text-sm text-muted-foreground leading-relaxed"
+                  }
+                >
+                  {ancora}
+                </p>
+              </li>
+            ))}
+          </ul>
+
+          {/* Pricing card */}
+          <div className="mx-auto max-w-md rounded-xl border border-markv/50 bg-card p-8 text-center">
             <p className="text-xs font-semibold text-markv-light tracking-wider uppercase mb-4">
-              Relatório completo
+              Relatório completo Compass
             </p>
             <div className="flex items-baseline justify-center gap-1 mb-2">
-              <span className="text-4xl font-bold text-foreground">R$ 29,90</span>
+              <span className="text-4xl font-bold text-foreground tabular-nums">
+                R$ 29,90
+              </span>
             </div>
             <p className="text-sm text-muted-foreground mb-6">
-              Pagamento único. Sem assinatura.
+              Pagamento único. Sem assinatura. Sem mensalidade.
             </p>
-            <Button asChild size="lg" className="w-full cursor-pointer font-semibold">
+
+            <Button
+              asChild
+              size="lg"
+              className="w-full cursor-pointer font-semibold"
+            >
               <Link href="/diagnostico">Começar diagnóstico gratuito</Link>
             </Button>
+
             <p className="text-xs text-muted-foreground mt-4 leading-relaxed">
-              O diagnóstico e o score são gratuitos.
-              <br />
-              Você só paga se quiser o relatório completo em PDF.
+              Diagnóstico e score gratuitos. Você só paga se quiser o relatório
+              completo em PDF.
             </p>
           </div>
         </div>
@@ -615,14 +782,14 @@ export default function Home() {
 
       <Separator />
 
-      {/* ── Placeholder: FAQ (to be replaced in Block 12 task) ───────────── */}
+      {/* ── Block 12: FAQ ─────────────────────────────────────────────────── */}
       <section className="py-20 px-4">
         <div className="mx-auto max-w-2xl">
-          <h2 className="text-2xl font-bold text-center mb-4">
-            Perguntas frequentes
+          <h2 className="text-2xl font-bold text-center mb-3">
+            Perguntas que o Ricardo faz antes de clicar
           </h2>
           <p className="text-sm text-muted-foreground text-center mb-10">
-            Tudo que você precisa saber antes de começar.
+            As objeções mais comuns. Respondidas direto, sem rodeio.
           </p>
 
           <Accordion type="single" collapsible className="w-full">
@@ -638,16 +805,15 @@ export default function Home() {
 
       <Separator />
 
-      {/* ── Placeholder: CTA final (to be replaced in Block 12 task) ─────── */}
+      {/* ── Block 12: CTA final ───────────────────────────────────────────── */}
       <section className="py-20 px-4 text-center">
         <div className="mx-auto max-w-lg">
-          <h2 className="text-2xl font-bold mb-4">
-            5 minutos. Score imediato. Você sai sabendo onde está.
+          <h2 className="text-2xl font-bold mb-4 leading-tight">
+            5 minutos. Score na hora. Você sai sabendo onde está.
           </h2>
           <p className="text-sm text-muted-foreground mb-8 leading-relaxed">
-            Nenhum dado financeiro solicitado. Nenhuma informação confidencial.
-            <br />
-            Só 20 perguntas sobre como você gere o negócio hoje.
+            Nenhum dado financeiro solicitado. Só 20 perguntas sobre como você
+            gere o negócio hoje.
           </p>
           <Button
             asChild
