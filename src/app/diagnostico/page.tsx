@@ -10,7 +10,7 @@ export const metadata: Metadata = {
 
 export default function DiagnosticoPage() {
   return (
-    <main className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-hero-bg overflow-hidden">
+    <main className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-background overflow-hidden">
       <SplineBackground />
       <div className="relative z-10 w-full max-w-md">
         <div className="mb-8">

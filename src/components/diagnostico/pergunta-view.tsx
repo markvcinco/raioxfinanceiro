@@ -51,7 +51,7 @@ export function PerguntaView({
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-hero-bg overflow-hidden">
+    <div className="relative min-h-screen flex flex-col bg-background overflow-hidden">
       <SplineBackground className="absolute inset-0" />
       <Progress value={progresso} />
 
