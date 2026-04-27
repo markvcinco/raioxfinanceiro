@@ -13,6 +13,8 @@ interface PageProps {
   searchParams: Promise<{ payment?: string }>;
 }
 
+export const maxDuration = 60;
+
 export const metadata: Metadata = {
   title: "Pagamento PIX — Raio-X Financeiro MARK V",
 };

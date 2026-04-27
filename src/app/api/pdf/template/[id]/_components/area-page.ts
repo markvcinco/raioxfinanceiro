@@ -51,8 +51,10 @@ export function renderAreaPage(
   const content = `
   <div style="padding-top: 25mm;">
     <!-- Area header -->
-    <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
-      <span style="font-size: 24px;">${area.icone}</span>
+    <div style="display: flex; align-items: center; gap: 14px; margin-bottom: 16px;">
+      <div style="width: 40px; height: 40px; border-radius: 8px; background: #0F5F3F; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+        <span style="font-size: 14px; font-weight: 700; color: #FAFAFA; letter-spacing: 0.5px;">0${area.numero}</span>
+      </div>
       <div style="flex: 1;">
         <p style="font-size: 10px; font-weight: 500; color: #71717A; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 2px;">
           Área ${area.numero} de 5
