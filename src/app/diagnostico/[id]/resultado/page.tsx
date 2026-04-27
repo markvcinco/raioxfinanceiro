@@ -4,6 +4,7 @@ import { AREAS } from "@/content/areas";
 import { FAIXAS } from "@/content/faixas";
 import { RadarScoreChart } from "@/components/resultado/radar-chart";
 import { Button } from "@/components/ui/button";
+import { SplineBackground } from "@/components/immersive/spline-background";
 import type { AreaId } from "@/content/areas";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -58,8 +59,13 @@ export default async function ResultadoPage({ params }: PageProps) {
   const faixa = FAIXAS.find((f) => f.id === persona);
 
   return (
-    <main className="min-h-screen px-4 py-12">
-      <div className="mx-auto max-w-2xl">
+    <main className="relative min-h-screen px-4 py-12 bg-background overflow-hidden">
+      <SplineBackground
+        className="fixed inset-0 pointer-events-none"
+        overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+      />
+
+      <div className="relative z-10 mx-auto max-w-2xl">
         {/* Header */}
         <div className="text-center mb-10">
           <p className="text-sm font-medium text-markv-light tracking-wider uppercase mb-2">

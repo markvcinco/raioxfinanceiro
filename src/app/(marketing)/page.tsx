@@ -22,6 +22,7 @@ import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { SplineBackground } from "@/components/immersive/spline-background";
 
 export const metadata: Metadata = {
   title: "Raio-X Compass: onde o dinheiro escapa na sua PME",
@@ -237,42 +238,50 @@ function PesoBadge({ peso }: { peso: number }) {
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="relative min-h-screen bg-background overflow-hidden">
+      <SplineBackground
+        className="fixed inset-0 pointer-events-none"
+        overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+      />
+
+      <div className="relative z-10">
 
       {/* ── Block 1: Hero ─────────────────────────────────────────────────── */}
-      <section className="flex flex-col items-center justify-center px-4 pt-24 pb-20 text-center">
-        <div className="flex items-center gap-2 mb-8">
-          <div className="h-6 w-1 rounded-full bg-markv" />
-          <span className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
-            MARK V
-          </span>
+      <section className="px-4 pt-24 pb-20">
+        <div className="flex flex-col items-center justify-center text-center">
+          <div className="flex items-center gap-2 mb-8">
+            <div className="h-6 w-1 rounded-full bg-markv" />
+            <span className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
+              MARK V
+            </span>
+          </div>
+
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl max-w-3xl mb-6 leading-[1.05]">
+            Seu faturamento cresceu.
+            <br />
+            <span className="text-markv-light">O lucro não acompanhou.</span>
+          </h1>
+
+          <p className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed">
+            O Raio-X Compass identifica onde o dinheiro está escapando.
+            20 perguntas, score de 0 a 100, resultado em menos de 5 minutos.
+          </p>
+
+          <Button
+            asChild
+            size="lg"
+            className="px-8 text-base font-semibold cursor-pointer group"
+          >
+            <Link href="/diagnostico">
+              Quero ver meu Score Compass
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </Button>
+
+          <p className="text-xs text-muted-foreground mt-4">
+            Gratuito até o resultado. Nenhum dado financeiro solicitado.
+          </p>
         </div>
-
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl max-w-3xl mb-6 leading-[1.05]">
-          Seu faturamento cresceu.
-          <br />
-          <span className="text-markv-light">O lucro não acompanhou.</span>
-        </h1>
-
-        <p className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed">
-          O Raio-X Compass identifica onde o dinheiro está escapando.
-          20 perguntas, score de 0 a 100, resultado em menos de 5 minutos.
-        </p>
-
-        <Button
-          asChild
-          size="lg"
-          className="px-8 text-base font-semibold cursor-pointer group"
-        >
-          <Link href="/diagnostico">
-            Quero ver meu Score Compass
-            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </Button>
-
-        <p className="text-xs text-muted-foreground mt-4">
-          Gratuito até o resultado. Nenhum dado financeiro solicitado.
-        </p>
       </section>
 
       <Separator />
@@ -872,6 +881,7 @@ export default function Home() {
           </div>
         </div>
       </footer>
+      </div>
     </main>
   );
 }
