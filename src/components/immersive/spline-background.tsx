@@ -11,7 +11,7 @@ interface SplineBackgroundProps {
 
 export function SplineBackground({
   className = "absolute inset-0",
-  overlayClassName = "absolute inset-0 bg-black/60 z-[1] pointer-events-none",
+  overlayClassName = "absolute inset-0 bg-black/50 z-[1] pointer-events-none",
 }: SplineBackgroundProps) {
   return (
     <>
