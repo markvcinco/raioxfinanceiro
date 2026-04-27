@@ -238,45 +238,48 @@ function PesoBadge({ peso }: { peso: number }) {
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen bg-background">
-      <div className="fixed inset-0 -z-10">
-        <SplineBackground className="absolute inset-0 pointer-events-none" />
-      </div>
-
+    <main className="min-h-screen bg-background">
       {/* ── Block 1: Hero ─────────────────────────────────────────────────── */}
-      <section className="flex flex-col items-center justify-center px-4 pt-24 pb-20 text-center">
-        <div className="flex items-center gap-2 mb-8">
-          <div className="h-6 w-1 rounded-full bg-markv" />
-          <span className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
-            MARK V
-          </span>
+      <section className="relative overflow-hidden px-4 pt-24 pb-20">
+        <SplineBackground
+          className="absolute inset-0 pointer-events-none"
+          overlayClassName="absolute inset-0 bg-black/30 z-[1] pointer-events-none"
+        />
+
+        <div className="relative z-10 flex flex-col items-center justify-center text-center">
+          <div className="flex items-center gap-2 mb-8">
+            <div className="h-6 w-1 rounded-full bg-markv" />
+            <span className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
+              MARK V
+            </span>
+          </div>
+
+          <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl max-w-3xl mb-6 leading-[1.05]">
+            Seu faturamento cresceu.
+            <br />
+            <span className="text-markv-light">O lucro não acompanhou.</span>
+          </h1>
+
+          <p className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed">
+            O Raio-X Compass identifica onde o dinheiro está escapando.
+            20 perguntas, score de 0 a 100, resultado em menos de 5 minutos.
+          </p>
+
+          <Button
+            asChild
+            size="lg"
+            className="px-8 text-base font-semibold cursor-pointer group"
+          >
+            <Link href="/diagnostico">
+              Quero ver meu Score Compass
+              <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+            </Link>
+          </Button>
+
+          <p className="text-xs text-muted-foreground mt-4">
+            Gratuito até o resultado. Nenhum dado financeiro solicitado.
+          </p>
         </div>
-
-        <h1 className="text-4xl font-bold tracking-tight sm:text-5xl lg:text-6xl max-w-3xl mb-6 leading-[1.05]">
-          Seu faturamento cresceu.
-          <br />
-          <span className="text-markv-light">O lucro não acompanhou.</span>
-        </h1>
-
-        <p className="text-lg text-muted-foreground max-w-xl mb-10 leading-relaxed">
-          O Raio-X Compass identifica onde o dinheiro está escapando.
-          20 perguntas, score de 0 a 100, resultado em menos de 5 minutos.
-        </p>
-
-        <Button
-          asChild
-          size="lg"
-          className="px-8 text-base font-semibold cursor-pointer group"
-        >
-          <Link href="/diagnostico">
-            Quero ver meu Score Compass
-            <ArrowRight className="ml-1 h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-          </Link>
-        </Button>
-
-        <p className="text-xs text-muted-foreground mt-4">
-          Gratuito até o resultado. Nenhum dado financeiro solicitado.
-        </p>
       </section>
 
       <Separator />
