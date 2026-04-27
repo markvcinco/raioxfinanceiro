@@ -242,7 +242,7 @@ export default function Home() {
       <div className="fixed inset-0 -z-10">
         <SplineBackground
           className="absolute inset-0 pointer-events-none"
-          overlayClassName="absolute inset-0 bg-black/45 pointer-events-none"
+          overlayClassName="absolute inset-0 bg-[linear-gradient(180deg,rgba(0,0,0,0.72)_0%,rgba(23,110,84,0.42)_100%)] pointer-events-none"
         />
       </div>
 
