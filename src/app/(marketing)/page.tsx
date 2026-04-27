@@ -17,10 +17,10 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { AREAS } from "@/content/areas";
 import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
@@ -146,12 +146,21 @@ const RELATORIO_ITEMS = [
 
 // ─── Block 9 data ────────────────────────────────────────────────────────────
 const LUCAS_CREDENCIAIS = [
-  "Engenheiro de Produção e MBA em Finanças",
-  "Mais de 10 anos em finanças, controladoria e conselho consultivo para PMEs",
-  "Ex-sócio da Sense (controladoria)",
+  "Engenheiro de Produção Mecânica e Especialista em Controladoria e Finanças pela USP/ESALQ",
+  "Ex-COO e sócio do Grupo Sense",
+  "Mais de 700 projetos de controladoria financeira e valuation",
   "Professor na PIB The New College",
   "Conselheiro consultivo financeiro em empresas de médio porte",
   "Fundador da MARK V",
+] as const;
+
+const LUCAS_CLIENTES = [
+  "Baly Brasil",
+  "Carmen Steffens",
+  "SME The New Economy",
+  "Bossa Invest",
+  "Grupo Vybbe",
+  "Stanley's Hats",
 ] as const;
 
 // ─── Block 10 data ───────────────────────────────────────────────────────────
@@ -609,13 +618,17 @@ export default function Home() {
             Quem desenvolveu o Raio-X Compass
           </h2>
 
-          <div className="grid gap-8 md:grid-cols-[auto_1fr] md:items-start">
+          <div className="grid gap-8 md:grid-cols-[180px_1fr] md:items-start">
             <div className="flex flex-col items-center md:items-start gap-3">
-              <Avatar className="h-16 w-16">
-                <AvatarFallback className="text-base font-semibold">
-                  LM
-                </AvatarFallback>
-              </Avatar>
+              <div className="relative h-56 w-44 overflow-hidden rounded-lg border border-border">
+                <Image
+                  src="/lucas-minucci.jpg"
+                  alt="Lucas Minucci"
+                  fill
+                  className="object-cover object-top"
+                  sizes="176px"
+                />
+              </div>
               <div className="text-center md:text-left">
                 <p className="text-sm font-semibold text-foreground">
                   Lucas Minucci
@@ -629,9 +642,8 @@ export default function Home() {
             <div>
               <p className="text-sm text-foreground leading-relaxed mb-5">
                 Lucas Minucci é especialista em finanças, controladoria e
-                conselho consultivo financeiro para PMEs. Mais de 10 anos
-                estruturando a gestão financeira de empresas com faturamento
-                entre R$ 1M e R$ 20M.
+                valuation para PMEs. Mais de 700 projetos estruturando a gestão
+                financeira de empresas com faturamento entre R$ 1M e R$ 20M.
               </p>
 
               <ul className="space-y-2 mb-5">
@@ -651,12 +663,23 @@ export default function Home() {
                 ))}
               </ul>
 
-              <p className="text-xs text-muted-foreground leading-relaxed border-l-2 border-markv/40 pl-3">
+              <p className="text-xs text-muted-foreground leading-relaxed border-l-2 border-markv/40 pl-3 mb-6">
                 O Raio-X Compass foi construído a partir do mesmo framework que
                 a MARK V aplica nas consultorias. Não é um questionário
                 genérico. É o diagnóstico que a gente faria antes de qualquer
                 engajamento.
               </p>
+
+              <div className="flex flex-wrap gap-2">
+                {LUCAS_CLIENTES.map((cliente) => (
+                  <span
+                    key={cliente}
+                    className="text-xs text-muted-foreground border border-border rounded px-2.5 py-1"
+                  >
+                    {cliente}
+                  </span>
+                ))}
+              </div>
             </div>
           </div>
         </div>
