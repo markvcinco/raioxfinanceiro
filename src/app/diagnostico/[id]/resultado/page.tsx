@@ -60,7 +60,10 @@ export default async function ResultadoPage({ params }: PageProps) {
 
   return (
     <main className="relative min-h-screen px-4 py-12 bg-background overflow-hidden">
-      <SplineBackground />
+      <SplineBackground
+        className="fixed inset-0 pointer-events-none"
+        overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+      />
 
       <div className="relative z-10 mx-auto max-w-2xl">
         {/* Header */}

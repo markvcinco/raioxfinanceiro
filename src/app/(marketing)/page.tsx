@@ -44,7 +44,10 @@ export default function MarketingPage() {
 export default function Home() {
   return (
     <main className="relative min-h-screen bg-background overflow-hidden">
-      <SplineBackground />
+      <SplineBackground
+        className="fixed inset-0 pointer-events-none"
+        overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+      />
 
       <div className="relative z-10">
 

@@ -6,6 +6,7 @@ import {
 import { gerarUrlAssinada } from "@/lib/supabase/storage";
 import { Button } from "@/components/ui/button";
 import { AutoRefresh } from "@/components/relatorio/auto-refresh";
+import { SplineBackground } from "@/components/immersive/spline-background";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -32,8 +33,12 @@ export default async function RelatorioPage({ params }: PageProps) {
   // State 1: Not paid yet
   if (!pagamento || pagamento.status === "pendente") {
     return (
-      <main className="min-h-screen flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md text-center">
+      <main className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-background overflow-hidden">
+        <SplineBackground
+          className="fixed inset-0 pointer-events-none"
+          overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+        />
+        <div className="relative z-10 w-full max-w-md text-center">
           <p className="text-sm font-medium text-markv-light tracking-wider uppercase mb-2">
             Raio-X Financeiro
           </p>
@@ -54,9 +59,13 @@ export default async function RelatorioPage({ params }: PageProps) {
   // State 2: Paid, PDF not yet generated — poll every 5s until ready
   if (diagnostico.status === "pago") {
     return (
-      <main className="min-h-screen flex items-center justify-center px-4 py-12">
+      <main className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-background overflow-hidden">
+        <SplineBackground
+          className="fixed inset-0 pointer-events-none"
+          overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+        />
         <AutoRefresh intervalMs={5000} />
-        <div className="w-full max-w-md text-center">
+        <div className="relative z-10 w-full max-w-md text-center">
           <p className="text-sm font-medium text-markv-light tracking-wider uppercase mb-2">
             Raio-X Financeiro
           </p>
@@ -87,8 +96,12 @@ export default async function RelatorioPage({ params }: PageProps) {
   }
 
   return (
-    <main className="min-h-screen px-4 py-12">
-      <div className="mx-auto max-w-lg">
+    <main className="relative min-h-screen px-4 py-12 bg-background overflow-hidden">
+      <SplineBackground
+        className="fixed inset-0 pointer-events-none"
+        overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+      />
+      <div className="relative z-10 mx-auto max-w-lg">
         {/* Header */}
         <div className="text-center mb-8">
           <p className="text-sm font-medium text-markv-light tracking-wider uppercase mb-2">
