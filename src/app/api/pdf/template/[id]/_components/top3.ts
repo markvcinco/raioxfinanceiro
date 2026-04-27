@@ -1,4 +1,5 @@
 import type { PrioridadeItem } from "@/lib/diagnostico/top-3-prioridades";
+import { COPY_PERGUNTAS } from "@/content/copy-perguntas";
 import { getScoreColor, wrapPage } from "./shared";
 
 export function renderTop3(
@@ -15,6 +16,7 @@ export function renderTop3(
         item.pergunta.enunciado.length > 120
           ? item.pergunta.enunciado.slice(0, 120) + "..."
           : item.pergunta.enunciado;
+      const copy = COPY_PERGUNTAS[item.pergunta.id];
 
       return `
       <div style="background: #18181B; border: 1px solid #27272A; border-radius: 8px; padding: 18px; margin-bottom: 12px;">
@@ -42,11 +44,11 @@ export function renderTop3(
         <div style="display: flex; gap: 16px;">
           <div style="flex: 1;">
             <p style="font-size: 9px; font-weight: 600; color: #14B866; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px;">O que isso revela</p>
-            <p style="font-size: 9px; color: #71717A; line-height: 1.5; font-style: italic;">A PRODUZIR</p>
+            <p style="font-size: 9px; color: #D4D4D8; line-height: 1.5;">${copy.revela}</p>
           </div>
           <div style="flex: 1;">
             <p style="font-size: 9px; font-weight: 600; color: #14B866; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px;">Por onde começar</p>
-            <p style="font-size: 9px; color: #71717A; line-height: 1.5; font-style: italic;">A PRODUZIR</p>
+            <p style="font-size: 9px; color: #D4D4D8; line-height: 1.5;">${copy.por_onde_comecar}</p>
           </div>
         </div>
       </div>`;
