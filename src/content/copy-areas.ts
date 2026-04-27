@@ -13,12 +13,6 @@ export interface CopyArea {
   readonly faixa_maduro: CopyFaixa;
 }
 
-const PLACEHOLDER: CopyFaixa = {
-  score_significa: "A PRODUZIR",
-  por_tras_disso: "A PRODUZIR",
-  custo_ignorar: "A PRODUZIR",
-};
-
 export const COPY_AREAS: Record<AreaId, CopyArea> = {
   // =========================================================================
   // ÁREA 1 — Gestão Financeira & Caixa
