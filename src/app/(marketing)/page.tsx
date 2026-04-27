@@ -238,15 +238,17 @@ function PesoBadge({ peso }: { peso: number }) {
 
 export default function Home() {
   return (
-    <main className="min-h-screen bg-background">
-      {/* ── Block 1: Hero ─────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden px-4 pt-24 pb-20">
+    <main className="relative min-h-screen bg-background">
+      <div className="fixed inset-0 -z-10">
         <SplineBackground
           className="absolute inset-0 pointer-events-none"
           overlayClassName="absolute inset-0 bg-black/30 z-[1] pointer-events-none"
         />
+      </div>
 
-        <div className="relative z-10 flex flex-col items-center justify-center text-center">
+      {/* ── Block 1: Hero ─────────────────────────────────────────────────── */}
+      <section className="px-4 pt-24 pb-20">
+        <div className="flex flex-col items-center justify-center text-center">
           <div className="flex items-center gap-2 mb-8">
             <div className="h-6 w-1 rounded-full bg-markv" />
             <span className="text-sm font-semibold tracking-widest text-muted-foreground uppercase">
