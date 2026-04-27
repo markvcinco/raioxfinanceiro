@@ -22,6 +22,7 @@ import { ArrowRight, Check } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
 import type { Metadata } from "next";
+import { SplineBackground } from "@/components/immersive/spline-background";
 
 export const metadata: Metadata = {
   title: "Raio-X Compass: onde o dinheiro escapa na sua PME",
@@ -237,7 +238,13 @@ function PesoBadge({ peso }: { peso: number }) {
 
 export default function Home() {
   return (
-    <main className="min-h-screen">
+    <main className="relative min-h-screen bg-background">
+      <div className="fixed inset-0 -z-10">
+        <SplineBackground
+          className="absolute inset-0 pointer-events-none"
+          overlayClassName="absolute inset-0 bg-black/45 pointer-events-none"
+        />
+      </div>
 
       {/* ── Block 1: Hero ─────────────────────────────────────────────────── */}
       <section className="flex flex-col items-center justify-center px-4 pt-24 pb-20 text-center">
