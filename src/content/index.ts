@@ -10,8 +10,5 @@ export type { Faixa } from "./faixas";
 export { COPY_AREAS } from "./copy-areas";
 export type { CopyArea, CopyFaixa } from "./copy-areas";
 
-export { COPY_PERGUNTAS } from "./copy-perguntas";
-export type { CopyPergunta } from "./copy-perguntas";
-
 export { PLANO_90_DIAS } from "./plano-90-dias";
 export type { AcaoPlano, FasePlano, PlanoPersona } from "./plano-90-dias";
