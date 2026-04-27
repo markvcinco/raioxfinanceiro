@@ -3,6 +3,8 @@ import { buscarDiagnosticoPorId } from "@/lib/supabase/queries";
 import { CheckoutForm } from "@/components/checkout/checkout-form";
 import type { Metadata } from "next";
 
+export const maxDuration = 60;
+
 interface PageProps {
   params: Promise<{ id: string }>;
 }
