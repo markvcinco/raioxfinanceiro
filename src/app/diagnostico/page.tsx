@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { FormCaptura } from "@/components/diagnostico/form-captura";
+import { SplineBackground } from "@/components/immersive/spline-background";
 
 export const metadata: Metadata = {
   title: "Diagnóstico — Raio-X Financeiro MARK V",
@@ -9,8 +10,9 @@ export const metadata: Metadata = {
 
 export default function DiagnosticoPage() {
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
+    <main className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-hero-bg overflow-hidden">
+      <SplineBackground />
+      <div className="relative z-10 w-full max-w-md">
         <div className="mb-8">
           <p className="text-sm font-medium text-markv-light tracking-wider uppercase mb-2">
             Raio-X Financeiro

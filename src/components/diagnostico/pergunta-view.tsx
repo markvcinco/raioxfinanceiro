@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { salvarRespostaAction } from "@/lib/diagnostico/actions";
 import { Progress } from "@/components/ui/progress";
 import { cn } from "@/lib/utils";
+import { SplineBackground } from "@/components/immersive/spline-background";
 import type { Pergunta } from "@/content/perguntas";
 import type { Resposta } from "@/types";
 
@@ -50,10 +51,11 @@ export function PerguntaView({
   }
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="relative min-h-screen flex flex-col bg-hero-bg overflow-hidden">
+      <SplineBackground className="absolute inset-0" />
       <Progress value={progresso} />
 
-      <main className="flex-1 flex items-center justify-center px-4 py-8">
+      <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
         <div className="w-full max-w-2xl">
 
           {/* Meta */}
