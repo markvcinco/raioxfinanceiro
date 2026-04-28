@@ -11,12 +11,12 @@ interface SplineBackgroundProps {
 
 export function SplineBackground({
   className = "absolute inset-0",
-  overlayClassName = "absolute inset-0 bg-black/30 z-[1] pointer-events-none",
+  overlayClassName = "absolute inset-0 bg-black/50 z-[1] pointer-events-none",
 }: SplineBackgroundProps) {
   return (
     <>
       <div className={className}>
-        <Suspense fallback={<div className="absolute inset-0 bg-hero-bg" />}>
+        <Suspense fallback={<div className="absolute inset-0 bg-background" />}>
           <Spline
             scene="https://prod.spline.design/Slk6b8kz3LRlKiyk/scene.splinecode"
             className="w-full h-full"

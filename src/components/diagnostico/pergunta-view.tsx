@@ -51,9 +51,12 @@ export function PerguntaView({
   }
 
   return (
-    <div className="relative min-h-screen flex flex-col bg-hero-bg overflow-hidden">
-      <SplineBackground className="absolute inset-0" />
-      <Progress value={progresso} />
+    <div className="relative min-h-screen flex flex-col bg-background overflow-hidden">
+      <SplineBackground
+        className="fixed inset-0 pointer-events-none"
+        overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+      />
+      <Progress value={progresso} className="relative z-10" />
 
       <main className="relative z-10 flex-1 flex items-center justify-center px-4 py-8">
         <div className="w-full max-w-2xl">

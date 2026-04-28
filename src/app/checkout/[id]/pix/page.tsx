@@ -5,6 +5,7 @@ import {
 } from "@/lib/supabase/queries";
 import { createAsaasClient } from "@/lib/asaas/client";
 import { PixAguardando } from "@/components/checkout/pix-aguardando";
+import { SplineBackground } from "@/components/immersive/spline-background";
 import Link from "next/link";
 import type { Metadata } from "next";
 
@@ -51,8 +52,12 @@ export default async function PixPage({ params, searchParams }: PageProps) {
     qrCode = await asaas.gerarQRCodePix(asaasPaymentId);
   } catch {
     return (
-      <main className="min-h-screen flex items-center justify-center px-4 py-12">
-        <div className="w-full max-w-md text-center">
+      <main className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-background overflow-hidden">
+        <SplineBackground
+          className="fixed inset-0 pointer-events-none"
+          overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+        />
+        <div className="relative z-10 w-full max-w-md text-center">
           <h1 className="text-xl font-bold text-foreground mb-4">
             Erro ao gerar QR Code
           </h1>
@@ -71,8 +76,12 @@ export default async function PixPage({ params, searchParams }: PageProps) {
   }
 
   return (
-    <main className="min-h-screen flex items-center justify-center px-4 py-12">
-      <div className="w-full max-w-md">
+    <main className="relative min-h-screen flex items-center justify-center px-4 py-12 bg-background overflow-hidden">
+      <SplineBackground
+        className="fixed inset-0 pointer-events-none"
+        overlayClassName="fixed inset-0 bg-black/50 z-[1] pointer-events-none"
+      />
+      <div className="relative z-10 w-full max-w-md">
         <div className="text-center mb-8">
           <p className="text-sm font-medium text-markv-light tracking-wider uppercase mb-2">
             Raio-X Financeiro
