@@ -24,7 +24,166 @@ import Image from "next/image";
 import type { Metadata } from "next";
 import { SplineBackground } from "@/components/immersive/spline-background";
 
-export default function MarketingPage() {
+export const metadata: Metadata = {
+  title: "Raio-X Compass | Diagnóstico financeiro para PMEs",
+  description:
+    "Descubra onde o dinheiro escapa na sua PME em menos de 5 minutos. Score financeiro gratuito e relatório completo Compass.",
+};
+
+const SCORE_PREVIEW_AREAS = [
+  { nome: "Gestão Financeira & Caixa", score: 38, critico: true },
+  { nome: "Precificação & Receita", score: 41, critico: true },
+  { nome: "Vendas & Previsibilidade", score: 52, critico: false },
+  { nome: "Operação & Margem", score: 47, critico: false },
+  { nome: "Governança & Decisão", score: 36, critico: true },
+] as const;
+
+const SINTOMAS = [
+  "O faturamento cresceu, mas o lucro continua sumindo.",
+  "Você vende bastante e ainda assim sente o caixa apertar.",
+  "O preço parece certo, mas a margem nunca fecha como deveria.",
+  "Toda decisão financeira depende de planilhas soltas e sensação.",
+  "A equipe trabalha muito, mas você não sabe onde a operação vaza dinheiro.",
+  "Você só descobre o problema quando ele já virou urgência.",
+] as const;
+
+const PASSOS = [
+  {
+    num: 1,
+    titulo: "Responda o diagnóstico",
+    desc: "20 perguntas objetivas sobre como sua empresa gere caixa, preço, vendas, margem e decisão.",
+  },
+  {
+    num: 2,
+    titulo: "Receba o Score Compass",
+    desc: "O resultado mostra sua maturidade financeira de 0 a 100 e aponta as áreas mais frágeis.",
+  },
+  {
+    num: 3,
+    titulo: "Decida o próximo passo",
+    desc: "Você vê o diagnóstico gratuito e escolhe se quer o relatório completo em PDF.",
+  },
+] as const;
+
+const PILARES_COMPASS = [
+  {
+    rotulo: "RAIO-X",
+    titulo: "Diagnóstico da maturidade",
+    desc: "Mostra onde a gestão financeira está forte, frágil ou operando no improviso.",
+    ativo: true,
+  },
+  {
+    rotulo: "PLANO",
+    titulo: "Prioridades de 90 dias",
+    desc: "Transforma o diagnóstico em uma sequência clara de decisão e execução.",
+    ativo: false,
+  },
+  {
+    rotulo: "GESTÃO",
+    titulo: "Rotina financeira",
+    desc: "Organiza indicadores, reuniões e controles para a empresa parar de apagar incêndio.",
+    ativo: false,
+  },
+  {
+    rotulo: "CONSELHO",
+    titulo: "Decisão com método",
+    desc: "Eleva a conversa de financeiro operacional para direção estratégica.",
+    ativo: false,
+  },
+] as const;
+
+const GRATUITO_ITEMS = [
+  "Score Compass imediato de 0 a 100.",
+  "Classificação do nível de maturidade financeira.",
+  "Radar das 5 áreas avaliadas.",
+  "Identificação da maior fragilidade do negócio.",
+  "Nenhum dado financeiro sensível solicitado.",
+] as const;
+
+const RELATORIO_ITEMS = [
+  {
+    titulo: "Leitura executiva do Score Compass",
+    detalhe:
+      "Uma interpretação direta do nível atual da empresa e do que esse score indica sobre caixa, margem e decisão.",
+  },
+  {
+    titulo: "Diagnóstico por área",
+    detalhe:
+      "Análise separada das 5 áreas avaliadas, com pesos diferentes conforme o impacto no resultado final.",
+  },
+  {
+    titulo: "Fragilidades prioritárias",
+    detalhe:
+      "O que deve ser atacado primeiro para reduzir vazamentos financeiros e melhorar previsibilidade.",
+  },
+  {
+    titulo: "Riscos de continuar como está",
+    detalhe:
+      "Tradução das respostas em riscos práticos para margem, caixa, preço, equipe e tomada de decisão.",
+  },
+  {
+    titulo: "Plano de ação inicial",
+    detalhe:
+      "Recomendações objetivas para os próximos 30 a 90 dias, sem depender de implantação complexa.",
+  },
+] as const;
+
+const LUCAS_CREDENCIAIS = [
+  "Especialista em finanças, controladoria e valuation para PMEs.",
+  "Mais de 700 projetos de estruturação financeira.",
+  "Atuação com empresas de R$ 1M a R$ 20M de faturamento.",
+] as const;
+
+const LUCAS_CLIENTES = [
+  "Varejo",
+  "Serviços",
+  "Indústria",
+  "Educação",
+  "Saúde",
+  "Tecnologia",
+] as const;
+
+const CASOS = [
+  {
+    contexto: "Preço e margem",
+    caso: "Empresa com vendas crescentes descobriu que parte dos produtos campeões carregava margem negativa depois dos custos indiretos.",
+  },
+  {
+    contexto: "Caixa",
+    caso: "Operação saudável no papel passou a prever aperto de caixa com antecedência ao separar resultado, prazo e capital de giro.",
+  },
+  {
+    contexto: "Decisão",
+    caso: "Sócios que decidiam por urgência criaram uma rotina de indicadores e reduziram discussões improdutivas sobre prioridade.",
+  },
+] as const;
+
+const ANCORAS = [
+  "Uma decisão errada de preço pode custar mais que o relatório em um único pedido.",
+  "Uma hora de consultoria costuma custar mais que o diagnóstico completo.",
+  "O maior custo é continuar sem saber onde o dinheiro escapa todo mês.",
+] as const;
+
+const FAQ = [
+  {
+    q: "Preciso informar faturamento, saldo ou extrato?",
+    a: "Não. O diagnóstico usa perguntas sobre práticas de gestão, não dados financeiros sensíveis.",
+  },
+  {
+    q: "O resultado gratuito já aparece na hora?",
+    a: "Sim. Ao terminar as 20 perguntas, você vê o Score Compass e a classificação geral.",
+  },
+  {
+    q: "Quando eu pago?",
+    a: "Só depois de ver o resultado gratuito, caso queira baixar o relatório completo em PDF.",
+  },
+  {
+    q: "Serve para qualquer empresa?",
+    a: "Foi desenhado para PMEs que já faturam, têm operação ativa e precisam melhorar lucro, caixa e previsibilidade.",
+  },
+] as const;
+
+function PesoBadge({ peso }: { peso: number }) {
   return (
     <TooltipProvider delayDuration={200}>
       <Tooltip>
