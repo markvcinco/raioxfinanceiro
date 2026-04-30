@@ -11,14 +11,7 @@ export function renderAreaPage(
   const cor = getScoreColor(scoreArea);
   const faixaLabel = getFaixaLabel(scoreArea);
   const copy = selecionarCopyArea(area.id, scoreArea);
-  const isPlaceholder = copy.score_significa === "A PRODUZIR";
-
-  const sections = isPlaceholder
-    ? `<div style="background: #18181B; border: 1px dashed #27272A; border-radius: 8px; padding: 32px; text-align: center; margin-top: 24px;">
-        <p style="font-size: 13px; color: #71717A;">Conteúdo em produção</p>
-        <p style="font-size: 11px; color: #52525B; margin-top: 8px;">A análise detalhada desta área será incluída em breve.</p>
-      </div>`
-    : `
+  const sections = `
       <div style="margin-top: 20px;">
         <div style="margin-bottom: 20px;">
           <h3 style="font-size: 11px; font-weight: 600; color: #14B866; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 10px;">

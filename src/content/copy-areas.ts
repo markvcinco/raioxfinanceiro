@@ -62,39 +62,103 @@ export const COPY_AREAS: Record<AreaId, CopyArea> = {
   // ÁREA 2 — Precificação & Receita (A PRODUZIR)
   // =========================================================================
   precificacao_receita: {
-    faixa_critico: { ...PLACEHOLDER },
-    faixa_fragil: { ...PLACEHOLDER },
-    faixa_construcao: { ...PLACEHOLDER },
-    faixa_maduro: { ...PLACEHOLDER },
+    faixa_critico: {
+      score_significa: "Sua precificação e sua dinâmica de receita não estão sustentando a operação com segurança. Você pode estar vendendo, mas sem clareza sobre margem real por oferta.",
+      por_tras_disso: "Normalmente isso acontece quando preço nasce da pressão comercial, sem modelo de custo, sem política de desconto e sem revisão periódica por canal e perfil de cliente.",
+      custo_ignorar: "Sem corrigir isso, a empresa cresce faturamento enquanto destrói rentabilidade. O efeito aparece em caixa pressionado, esforço alto e retorno baixo ao longo dos trimestres.",
+    },
+    faixa_fragil: {
+      score_significa: "Você tem alguma estrutura de preço e receita, mas ainda com lacunas de método e disciplina. Parte das decisões depende de exceções e negociação caso a caso.",
+      por_tras_disso: "Em geral falta um critério único para margem mínima, limites de desconto e acompanhamento por tipo de cliente. Isso cria variação grande no resultado mensal.",
+      custo_ignorar: "O risco é consolidar uma operação comercial que parece saudável no topo do funil, mas entrega resultado inconsistente no caixa e reduz capacidade de investimento.",
+    },
+    faixa_construcao: {
+      score_significa: "Sua empresa já tem base de precificação e acompanhamento de receita, com sinais de maturidade acima da média. Ainda há espaço para integração fina entre comercial e finanças.",
+      por_tras_disso: "Nessa fase, o principal gargalo costuma ser governança de decisões excepcionais e análise contínua de margem por produto, pacote, canal e carteira.",
+      custo_ignorar: "Sem consolidar esse método, você mantém boa performance, mas deixa captura de margem na mesa e adia ganhos relevantes de previsibilidade para escalar com segurança.",
+    },
+    faixa_maduro: {
+      score_significa: "Você opera com precificação e gestão de receita maduras, com boa leitura de valor, margem e posicionamento. Isso coloca a empresa em patamar competitivo forte.",
+      por_tras_disso: "Esse nível normalmente vem de disciplina em dados, revisão periódica de tese comercial e alinhamento entre metas de crescimento e qualidade de receita.",
+      custo_ignorar: "O custo de não evoluir agora é de oportunidade. Você preserva o resultado atual, mas pode perder eficiência estratégica e velocidade de captura de valor em novos ciclos.",
+    },
   },
 
   // =========================================================================
   // ÁREA 3 — Vendas & Previsibilidade (A PRODUZIR)
   // =========================================================================
   vendas_previsibilidade: {
-    faixa_critico: { ...PLACEHOLDER },
-    faixa_fragil: { ...PLACEHOLDER },
-    faixa_construcao: { ...PLACEHOLDER },
-    faixa_maduro: { ...PLACEHOLDER },
+    faixa_critico: {
+      score_significa: "Seu processo de vendas ainda não gera previsibilidade confiável. O resultado depende de esforço pontual e variação alta entre meses.",
+      por_tras_disso: "Geralmente faltam critérios objetivos de pipeline, cadência comercial e forecast com hipóteses claras. Sem isso, decisão vira reação.",
+      custo_ignorar: "A empresa fica exposta a ciclos de estresse: meses fortes seguidos de buracos de receita, prejudicando caixa, time e planejamento operacional.",
+    },
+    faixa_fragil: {
+      score_significa: "Você já acompanha parte do funil e da conversão, mas sem estabilidade suficiente para antecipar resultado com confiança executiva.",
+      por_tras_disso: "A origem costuma estar em dados incompletos de CRM, rituais irregulares de revisão e ausência de metas por etapa do funil.",
+      custo_ignorar: "Sem ajuste, o crescimento continua possível, porém com baixa previsibilidade. Isso encarece aquisição e reduz qualidade da tomada de decisão.",
+    },
+    faixa_construcao: {
+      score_significa: "Seu modelo comercial mostra base consistente de previsibilidade e controle de pipeline. Há maturidade operacional em construção.",
+      por_tras_disso: "Neste estágio, o avanço depende de melhorar precisão do forecast, separar cenários e conectar metas comerciais à capacidade de entrega.",
+      custo_ignorar: "Se parar aqui, você mantém estabilidade, mas limita potencial de escala e corre risco de desalinhamento entre venda, operação e margem.",
+    },
+    faixa_maduro: {
+      score_significa: "Sua operação de vendas é previsível, estruturada e orientada por dados. O negócio consegue planejar crescimento com maior segurança.",
+      por_tras_disso: "Isso costuma refletir processo comercial padronizado, indicadores confiáveis e liderança com disciplina de execução e revisão contínua.",
+      custo_ignorar: "O próximo salto vem de sofisticação estratégica. Sem evoluir, o sistema permanece bom, mas deixa ganhos de eficiência e expansão em aberto.",
+    },
   },
 
   // =========================================================================
   // ÁREA 4 — Operação & Margem (A PRODUZIR)
   // =========================================================================
   operacao_margem: {
-    faixa_critico: { ...PLACEHOLDER },
-    faixa_fragil: { ...PLACEHOLDER },
-    faixa_construcao: { ...PLACEHOLDER },
-    faixa_maduro: { ...PLACEHOLDER },
+    faixa_critico: {
+      score_significa: "Sua operação ainda consome recursos sem controle adequado de eficiência e margem. O esforço do time não se converte totalmente em resultado.",
+      por_tras_disso: "Normalmente faltam padrões de processo, leitura clara de custos por atividade e rotina de eliminação de retrabalho e desperdício.",
+      custo_ignorar: "O risco é crescer com estrutura pesada e margem comprimida, comprometendo caixa e reduzindo capacidade de reinvestimento no próprio negócio.",
+    },
+    faixa_fragil: {
+      score_significa: "Há sinais de organização operacional, mas com variação relevante de produtividade e margem entre períodos ou frentes.",
+      por_tras_disso: "Frequentemente isso vem de processos parcialmente documentados, indicadores pouco acionáveis e baixa integração entre operação e finanças.",
+      custo_ignorar: "Sem consolidação, a empresa mantém desempenho irregular e perde oportunidades de ganho rápido de eficiência com impacto direto no lucro.",
+    },
+    faixa_construcao: {
+      score_significa: "Sua operação já apresenta padrões e controle que sustentam margem com mais consistência. A base para escalar está formada.",
+      por_tras_disso: "Nesta fase, o avanço vem de refinamento: medir melhor gargalos, padronizar exceções e reforçar gestão por indicadores críticos de margem.",
+      custo_ignorar: "O custo de não avançar é de produtividade. Você preserva resultado atual, mas reduz velocidade de evolução e proteção contra oscilações.",
+    },
+    faixa_maduro: {
+      score_significa: "Você tem operação madura e orientada a eficiência, com controle consistente de margem e disciplina de execução.",
+      por_tras_disso: "Esse nível costuma resultar de liderança operacional forte, governança de processos e integração contínua entre dados de custo e decisão.",
+      custo_ignorar: "A oportunidade agora está em otimização avançada. Sem isso, o sistema segue sólido, mas abre espaço para concorrentes mais eficientes.",
+    },
   },
 
   // =========================================================================
   // ÁREA 5 — Governança & Decisão (A PRODUZIR)
   // =========================================================================
   governanca_decisao: {
-    faixa_critico: { ...PLACEHOLDER },
-    faixa_fragil: { ...PLACEHOLDER },
-    faixa_construcao: { ...PLACEHOLDER },
-    faixa_maduro: { ...PLACEHOLDER },
+    faixa_critico: {
+      score_significa: "A governança de decisão ainda é centralizada e reativa. A empresa depende de poucas pessoas para resolver temas críticos.",
+      por_tras_disso: "Isso ocorre quando faltam ritos executivos, critérios formais de prioridade e registro de decisões com responsáveis e prazos.",
+      custo_ignorar: "Sem governança, o negócio perde velocidade e qualidade de execução. O custo aparece em retrabalho, conflitos e decisões tardias.",
+    },
+    faixa_fragil: {
+      score_significa: "Você já tem elementos de governança, mas ainda sem consistência para sustentar decisões estratégicas de forma previsível.",
+      por_tras_disso: "Geralmente existem reuniões e indicadores, porém sem cadência rigorosa, accountability clara e revisão estruturada de desvios.",
+      custo_ignorar: "O risco é manter a empresa funcionando com atrito oculto. A operação anda, mas com perda de foco e baixa tração em prioridades.",
+    },
+    faixa_construcao: {
+      score_significa: "Sua governança evoluiu e já permite decisões mais qualificadas, com melhor coordenação entre áreas e prioridades.",
+      por_tras_disso: "Neste estágio, o próximo nível depende de fortalecer qualidade da discussão estratégica, contestação de premissas e aprendizado por ciclo.",
+      custo_ignorar: "Sem esse avanço, a empresa estabiliza em um bom patamar, mas limita profundidade das decisões e potencial de crescimento composto.",
+    },
+    faixa_maduro: {
+      score_significa: "Sua empresa opera com governança madura, decisões rastreáveis e boa disciplina executiva. Há clareza de prioridades e responsabilidade.",
+      por_tras_disso: "Esse resultado costuma vir de liderança com método, rituais consistentes e cultura de decisão baseada em dados e contexto.",
+      custo_ignorar: "O próximo ganho é de excelência estratégica. Se não evoluir, você protege o padrão atual, mas deixa valor de longo prazo sem capturar.",
+    },
   },
 } as const;

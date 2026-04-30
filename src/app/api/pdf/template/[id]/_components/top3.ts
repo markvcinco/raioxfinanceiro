@@ -1,3 +1,4 @@
+import { MICRO_TEXTOS } from "@/content/micro-textos";
 import type { PrioridadeItem } from "@/lib/diagnostico/top-3-prioridades";
 import { getScoreColor, wrapPage } from "./shared";
 
@@ -42,11 +43,11 @@ export function renderTop3(
         <div style="display: flex; gap: 16px;">
           <div style="flex: 1;">
             <p style="font-size: 9px; font-weight: 600; color: #14B866; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px;">O que isso revela</p>
-            <p style="font-size: 9px; color: #71717A; line-height: 1.5; font-style: italic;">A PRODUZIR</p>
+            <p style="font-size: 9px; color: #A1A1AA; line-height: 1.5;">${MICRO_TEXTOS[`p${item.pergunta.numero as 1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20}`].revela}</p>
           </div>
           <div style="flex: 1;">
             <p style="font-size: 9px; font-weight: 600; color: #14B866; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 3px;">Por onde começar</p>
-            <p style="font-size: 9px; color: #71717A; line-height: 1.5; font-style: italic;">A PRODUZIR</p>
+            <p style="font-size: 9px; color: #A1A1AA; line-height: 1.5;">${MICRO_TEXTOS[`p${item.pergunta.numero as 1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20}`].comecar}</p>
           </div>
         </div>
       </div>`;
