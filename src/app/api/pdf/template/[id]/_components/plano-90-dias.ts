@@ -8,41 +8,30 @@ export function renderPlano90Dias(
 ): string {
   const plano = PLANO_90_DIAS[persona];
   const faseColors = ["#14B866", "#0EA5E9", "#A855F7"];
+  const fases = [
+    { label: "Diagnosticar", acoes: plano.fase1 },
+    { label: "Estruturar", acoes: plano.fase2 },
+    { label: "Consolidar", acoes: plano.fase3 },
+  ] as const;
 
-  const fasesHtml = plano.fases
-    .map((fase, faseIdx) => {
-      const cor = faseColors[faseIdx] ?? "#14B866";
-
-      const acoesHtml = fase.acoes
-        .map((acao, acaoIdx) => {
-          const isPlaceholder = acao.titulo === "A PRODUZIR";
-          return `
-        <div style="display: flex; gap: 10px; margin-bottom: 8px;">
-          <div style="width: 20px; height: 20px; border-radius: 50%; background: ${cor}15; border: 1px solid ${cor}40; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
-            <span style="font-size: 9px; font-weight: 600; color: ${cor};">${faseIdx * 3 + acaoIdx + 1}</span>
-          </div>
-          <div>
-            <p style="font-size: 11px; font-weight: 600; color: ${isPlaceholder ? "#52525B" : "#FAFAFA"}; margin-bottom: 2px;${isPlaceholder ? " font-style: italic;" : ""}">
-              ${acao.titulo}
-            </p>
-            ${!isPlaceholder ? `<p style="font-size: 10px; color: #A1A1AA; line-height: 1.5;">${acao.descricao}</p>` : ""}
-          </div>
-        </div>`;
-        })
-        .join("\n");
-
-      return `
+  const fasesHtml = fases.map((fase, faseIdx) => {
+    const cor = faseColors[faseIdx] ?? "#14B866";
+    const acoesHtml = fase.acoes.map((acao, acaoIdx) => `
+      <div style="display: flex; gap: 10px; margin-bottom: 8px;">
+        <div style="width: 20px; height: 20px; border-radius: 50%; background: ${cor}15; border: 1px solid ${cor}40; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px;">
+          <span style="font-size: 9px; font-weight: 600; color: ${cor};">${faseIdx * 3 + acaoIdx + 1}</span>
+        </div>
+        <p style="font-size: 10px; color: #D4D4D8; line-height: 1.5;">${acao}</p>
+      </div>`).join("\n");
+    return `
       <div style="margin-bottom: 20px;">
         <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px; padding-bottom: 8px; border-bottom: 1px solid ${cor}30;">
           <div style="width: 4px; height: 20px; background: ${cor}; border-radius: 2px;"></div>
-          <h3 style="font-size: 13px; font-weight: 600; color: ${cor};">
-            ${fase.label}
-          </h3>
+          <h3 style="font-size: 13px; font-weight: 600; color: ${cor};">${fase.label}</h3>
         </div>
         ${acoesHtml}
       </div>`;
-    })
-    .join("\n");
+  }).join("\n");
 
   const content = `
   <div style="padding-top: 25mm;">
@@ -54,7 +43,7 @@ export function renderPlano90Dias(
         Seus próximos 90 dias
       </h2>
       <p style="font-size: 11px; color: #71717A;">
-        ${plano.titulo_plano}
+        Plano priorizado para converter diagnóstico em execução consistente
       </p>
     </div>
 

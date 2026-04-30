@@ -1,0 +1,25 @@
+export const MICRO_TEXTOS: Record<
+  `p${1|2|3|4|5|6|7|8|9|10|11|12|13|14|15|16|17|18|19|20}`,
+  { revela: string; comecar: string }
+> = {
+  p1: { revela: "Sua rotina financeira ainda não gera previsibilidade consistente de caixa e resultado.", comecar: "Defina fechamento mensal com DRE gerencial e revisão quinzenal de fluxo de caixa." },
+  p2: { revela: "O controle de entradas e saídas existe, mas não está conectado a decisões recorrentes.", comecar: "Padronize categorias e reconcilie contas semanalmente com responsável definido." },
+  p3: { revela: "A empresa reage a urgências porque não transforma dados em alertas antecipados.", comecar: "Implemente três indicadores de alerta e gatilhos objetivos para ação." },
+  p4: { revela: "Há dependência do dono para validar decisões financeiras operacionais.", comecar: "Documente critérios de aprovação e delegue limites por faixa de valor." },
+  p5: { revela: "A precificação atual pode não refletir margem alvo por produto ou serviço.", comecar: "Refaça estrutura de custos e estabeleça margem mínima por oferta." },
+  p6: { revela: "Descontos e negociações podem estar corroendo rentabilidade sem visibilidade.", comecar: "Crie política de descontos com alçadas e piso de contribuição." },
+  p7: { revela: "Receita cresce sem previsibilidade de qualidade e recorrência.", comecar: "Separe receita nova, recorrente e perdida em painel mensal." },
+  p8: { revela: "Falta clareza sobre quais clientes e canais realmente sustentam margem.", comecar: "Acompanhe margem por cliente e canal para priorizar carteira." },
+  p9: { revela: "O funil comercial não está convertendo com consistência suficiente.", comecar: "Mapeie etapas do funil e metas de conversão por estágio." },
+  p10: { revela: "A previsão de vendas depende mais de percepção do que de método.", comecar: "Adote forecast semanal com cenário base, conservador e agressivo." },
+  p11: { revela: "A operação comercial pode estar desalinhada entre aquisição e entrega.", comecar: "Conecte metas de vendas à capacidade operacional e margem esperada." },
+  p12: { revela: "Decisões comerciais ocorrem sem pós-análise de resultado por ciclo.", comecar: "Institua rito mensal de lições aprendidas com dados de conversão." },
+  p13: { revela: "Custos operacionais podem crescer sem ganho proporcional de eficiência.", comecar: "Revise centros de custo e elimine despesas sem impacto em valor." },
+  p14: { revela: "A margem operacional está vulnerável a variações de preço e insumo.", comecar: "Crie monitoramento de margem de contribuição por linha principal." },
+  p15: { revela: "A empresa pode executar bem, mas sem padrão replicável entre equipes.", comecar: "Documente processos críticos e defina indicadores de aderência." },
+  p16: { revela: "Há retrabalho por ausência de rotina de melhoria contínua operacional.", comecar: "Implemente checklists semanais e revisão de causas de retrabalho." },
+  p17: { revela: "A governança financeira ainda não transforma reuniões em decisões rastreáveis.", comecar: "Formalize pauta, responsáveis, prazo e evidência por decisão." },
+  p18: { revela: "A empresa carece de cadência executiva para revisar metas e desvios.", comecar: "Estabeleça reunião mensal de performance com indicadores fixos." },
+  p19: { revela: "Riscos relevantes não estão priorizados em plano de mitigação ativo.", comecar: "Liste riscos críticos, probabilidade, impacto e plano preventivo." },
+  p20: { revela: "A tomada de decisão estratégica pode estar concentrada e pouco contestada.", comecar: "Inclua revisão externa trimestral de premissas e cenários estratégicos." },
+};
